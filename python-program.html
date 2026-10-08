@@ -6,38 +6,67 @@
 <title>Python Programs - NIAT Hub</title>
 <style>
 body{font-family:Arial;background:#0f172a;color:white;padding:20px}
-h1{color:#38bdf8;text-align:center}
-.card{background:#1e293b;padding:15px;border-radius:10px;margin:15px 0;border-left:4px solid #38bdf8}
-pre{background:#0f172a;padding:10px;border-radius:5px;overflow-x:auto;color:#22c55e}
-a{color:#38bdf8;text-decoration:none}
+a{color:#60a5fa;text-decoration:none}
+.header{text-align:center;background:#1e293b;padding:20px;border-radius:15px;margin-bottom:20px}
+.search-box{width:90%;max-width:400px;padding:12px;border-radius:10px;border:none;margin-top:15px}
+.card{background:#1e293b;padding:20px;margin:15px 0;border-radius:12px;border-left:5px solid #3b82f6}
+pre{background:#020617;padding:15px;border-radius:8px;overflow-x:auto}
+.btn{background:#3b82f6;color:white;padding:8px 15px;border-radius:8px;border:none;cursor:pointer;margin-top:10px}
+.btn:hover{background:#2563eb}
 </style>
 </head>
 <body>
-<a href="index.html">← Back to Home</a>
-<h1>🐍 NIAT Python Lab Programs (1st Year)</h1>
 
+<div class="header">
+<a href="index.html">⬅ Back to Home</a>
+<h1>🐍 NIAT Python Lab Programs (1st Year)</h1>
+<input type="text" id="search" class="search-box" onkeyup="searchProgram()" placeholder="Search program... ex: prime, factorial">
+</div>
+
+<div id="programs">
 <div class="card">
 <h3>1. Hello World</h3>
-<pre>print("Hello, NIAT!")</pre>
-<h4>Output:</h4><pre>Hello, NIAT!</pre>
+<p>Basic python program to print Hello NIAT</p>
+<pre id="code1">print("Hello NIAT, By NIATians")</pre>
+<button class="btn" onclick="copyCode('code1')">Copy Code</button>
 </div>
 
 <div class="card">
 <h3>2. Add Two Numbers</h3>
-<pre>a = int(input("Enter a: "))
-b = int(input("Enter b: "))
-print("Sum:", a+b)</pre>
+<p>Add two numbers taken from user</p>
+<pre id="code2">a = int(input("Enter first number: "))
+b = int(input("Enter second number: "))
+print("Sum is:", a+b)</pre>
+<button class="btn" onclick="copyCode('code2')">Copy Code</button>
 </div>
 
 <div class="card">
-<h3>3. Check Even or Odd</h3>
-<pre>n = int(input("Enter number: "))
+<h3>3. Even or Odd</h3>
+<p>Check number is even or odd</p>
+<pre id="code3">n = int(input("Enter number: "))
 if n % 2 == 0:
     print("Even")
 else:
     print("Odd")</pre>
+<button class="btn" onclick="copyCode('code3')">Copy Code</button>
+</div>
 </div>
 
-<p style="text-align:center;margin-top:30px">More programs will be added soon... 🚀</p>
+<script>
+function searchProgram(){
+ let input = document.getElementById('search').value.toLowerCase();
+ let cards = document.getElementsByClassName('card');
+ for(let i=0;i<cards.length;i++){
+   let text = cards[i].innerText.toLowerCase();
+   cards[i].style.display = text.includes(input)? "" : "none";
+ }
+}
+function copyCode(id){
+ let code = document.getElementById(id).innerText;
+ navigator.clipboard.writeText(code);
+ alert("Copied! ✅");
+}
+</script>
+
 </body>
 </html>
