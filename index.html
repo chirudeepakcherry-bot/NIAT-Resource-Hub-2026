@@ -1,62 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NIAT Resource Hub 2026</title>
-    <style>
-        body { font-family: Arial; background: #0f172a; color: white; margin: 0; padding: 20px; }
-        .header { text-align: center; background: #6366f1; padding: 30px; border-radius: 15px; }
-        .header h1 { margin: 0; font-size: 2.5em; }
-        .container { max-width: 900px; margin: 20px auto; }
-        .card { background: #1e293b; padding: 20px; margin: 15px 0; border-radius: 10px; border-left: 5px solid #6366f1; }
-        .card h2 { color: #818cf8; }
-        .btn { background: #6366f1; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; display: inline-block; margin-top: 10px; }
-        .footer { text-align: center; margin-top: 30px; color: #94a3b8; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIAT Resource Hub 2026</title>
+<style>
+body { font-family: Arial; background: #0f172a; color: white; margin: 0; padding: 20px; }
+.header { text-align: center; background: #1e293b; padding: 30px; border-radius: 15px; }
+.header h1 { font-size: 2.5em; }
+.container { max-width: 900px; margin: 20px auto; }
+.card { background: #1e293b; padding: 20px; margin: 15px 0; border-radius: 10px; border-left: 5px solid #3b82f6; }
+.card h2 { color: #93c5fd; }
+.btn { background: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; display: inline-block; margin-top: 10px; }
+.footer { text-align: center; margin-top: 30px; color: #94a3b8; }
+</style>
 </head>
 <body>
-    <div class="header">
-        <h1>🚀 NIAT Resource Hub</h1>
-        <p>Made for NIATians, By NIATians | Hacktoberfest 2026</p>
-    </div>
 
-    <div class="container">
-        <div class="card">
-            <h2>📚 Python Programs</h2>
-            <div class="card">
-<h3>Python Programs</h3>
+<div class="header">
+<h1>🚀 NIAT Resource Hub</h1>
+<p>Made for NIATians, By NIATians | Hacktoberfest 2026</p>
+</div>
+
+<div class="container">
+<div class="card">
+<h3>🐍 Python Programs</h3>
 <p>50+ easy Python lab programs for 1st year with outputs.</p>
 <a href="python-program.html" class="btn">View Programs</a>
 </div>
 
 <div class="card">
-<h3>Notes & PDFs</h3>
+<h3>📄 Notes & PDFs</h3>
 <p>All subject notes for C, Maths & English in one place.</p>
 <a href="Notes.html" class="btn">Download Notes</a>
 </div>
 
 <div class="card">
-<h3>Mini Projects</h3>
+<h3>💡 Mini Projects</h3>
 <p>Easy beginner-friendly mini projects with full source code.</p>
 <a href="Projects.html" class="btn">See Projects</a>
 </div>
-            <p>python programs 50+ easy python lab programs for all years with output</p>
-            <a href="python-program.html" class="btn">View Programs</a>
-        </div>
-        <div class="card">
-            <h2>📝 Notes & PDFs</h2>
-            <p>All subject notes in one place.</p>
-            <a href="#" class="btn">Download Notes</a>
-        </div>
-        <div class="card">
-            <h2>💡 Mini Projects</h2>
-            <p>simple mini projects for beginners with source code.</p>
-            <a href="#" class="btn">See Projects</a>
-        </div>
-    </div>
-    <div class="footer">
-        <p>Made with ❤️ for Hacktoberfest 2026 | Tirune Fest</p>
-    </div>
+</div>
+
+<div class="footer">
+<p>© 2026 NIAT Resource Hub | Built with ❤️</p>
+</div>
+
+<!-- AI CHATBOT START -->
+<style>
+#chat-btn{position:fixed;bottom:20px;right:20px;background:#3b82f6;color:white;border:none;width:60px;height:60px;border-radius:50%;font-size:30px;cursor:pointer;z-index:1000}
+#chat-box{position:fixed;bottom:90px;right:20px;width:300px;height:350px;background:#1e293b;border-radius:15px;display:none;flex-direction:column;z-index:1000;border:1px solid #3b82f6}
+#chat-head{background:#3b82f6;padding:10px;border-radius:15px 15px 0 0;text-align:center;font-weight:bold}
+#chat-messages{flex:1;padding:10px;overflow-y:auto;font-size:14px}
+#chat-input{display:flex;padding:10px}
+#chat-input input{flex:1;padding:8px;border-radius:8px;border:none}
+#chat-input button{margin-left:5px;background:#3b82f6;color:white;border:none;padding:8px 12px;border-radius:8px;cursor:pointer}
+.msg{margin:5px 0;padding:8px;border-radius:8px}
+.user{background:#3b82f6;text-align:right}
+.bot{background:#334155}
+</style>
+<button id="chat-btn" onclick="toggleChat()">💬</button>
+<div id="chat-box">
+<div id="chat-head">NIAT AI 🤖</div>
+<div id="chat-messages"><div class="msg bot">Hii mawa! Python doubt adugu 😎</div></div>
+<div id="chat-input"><input type="text" id="userMsg" placeholder="Ask anything..."><button onclick="sendMsg()">Send</button></div>
+</div>
+<script>
+function toggleChat(){let b=document.getElementById('chat-box');b.style.display=b.style.display==='flex'?'none':'flex';}
+function sendMsg(){let i=document.getElementById('userMsg');let m=i.value.trim();if(!m)return;let c=document.getElementById('chat-messages');c.innerHTML+=`<div class="msg user">${m}</div>`;i.value='';let r="Good question! Check Programs page 🐍";if(m.toLowerCase().includes("notes"))r="Notes page lo anni PDFs unnayi mawa 📄";else if(m.toLowerCase().includes("even"))r="Even check: n%2==0 use chey mawa!";else if(m.toLowerCase().includes("project"))r="Projects page lo 3 mini projects unnayi, check chey 💡";setTimeout(()=>{c.innerHTML+=`<div class="msg bot">${r}</div>`;c.scrollTop=c.scrollHeight;},500);}
+</script>
+<!-- AI CHATBOT END -->
+
 </body>
 </html>
