@@ -3,68 +3,158 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Python Programs - NIAT Hub</title>
+<title>NIAT Code Tutor - All Languages</title>
 <style>
-body{font-family:Arial;background:#0f172a;color:white;padding:20px}
+body{font-family:Arial;background:#0f172a;color:white;padding:20px;margin:0}
 a{color:#60a5fa;text-decoration:none}
-.header{text-align:center;background:#1e293b;padding:20px;border-radius:15px;margin-bottom:20px}
-.search-box{width:90%;max-width:400px;padding:12px;border-radius:10px;border:none;margin-top:15px}
-.card{background:#1e293b;padding:20px;margin:15px 0;border-radius:12px;border-left:5px solid #3b82f6}
-pre{background:#020617;padding:15px;border-radius:8px;overflow-x:auto}
-.btn{background:#3b82f6;color:white;padding:8px 15px;border-radius:8px;border:none;cursor:pointer;margin-top:10px}
-.btn:hover{background:#2563eb}
+.header{text-align:center;background:#1e293b;padding:20px;border-radius:15px;position:sticky;top:0;z-index:10}
+.search-box{width:90%;max-width:500px;padding:14px;border-radius:12px;border:none;margin:15px 0;font-size:16px}
+.lang-btns button{padding:8px 15px;margin:5px;border:none;border-radius:20px;background:#334155;color:white;cursor:pointer}
+.lang-btns button.active{background:#3b82f6}
+.card{background:#1e293b;padding:20px;margin:20px 0;border-radius:15px;border-left:5px solid #3b82f6}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.tab{padding:6px 12px;background:#334155;border-radius:8px;cursor:pointer;font-size:13px}
+.tab.active{background:#3b82f6}
+pre{background:#020617;padding:15px;border-radius:8px;overflow-x:auto;display:none}
+pre.show{display:block}
+.btn{background:#3b82f6;color:white;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;margin:5px 5px 0 0}
+.explain{background:#0f172a;padding:12px;border-radius:8px;margin:10px 0;font-size:14px;line-height:1.6}
+.qa{margin-top:12px}
+.qa details{background:#020617;padding:10px;border-radius:8px;margin:6px 0}
+.qa summary{cursor:pointer;color:#93c5fd;font-weight:bold}
 </style>
 </head>
 <body>
 
 <div class="header">
 <a href="index.html">⬅ Back to Home</a>
-<h1>🐍 NIAT Python Lab Programs (1st Year)</h1>
-<input type="text" id="search" class="search-box" onkeyup="searchProgram()" placeholder="Search program... ex: prime, factorial">
+<h1>🤖 NIAT Code Tutor - Learn Like ChatGPT</h1>
+<input type="text" id="search" class="search-box" onkeyup="searchProgram()" placeholder="Search... Type 'hello world', 'even odd', 'factorial'">
+<div class="lang-btns">
+<button class="active" onclick="filterLang('all',this)">All</button>
+<button onclick="filterLang('python',this)">Python</button>
+<button onclick="filterLang('java',this)">Java</button>
+<button onclick="filterLang('c',this)">C</button>
+<button onclick="filterLang('cpp',this)">C++</button>
+<button onclick="filterLang('js',this)">JavaScript</button>
+</div>
 </div>
 
 <div id="programs">
-<div class="card">
-<h3>1. Hello World</h3>
-<p>Basic python program to print Hello NIAT</p>
-<pre id="code1">print("Hello NIAT, By NIATians")</pre>
-<button class="btn" onclick="copyCode('code1')">Copy Code</button>
+
+<!-- 1. HELLO WORLD -->
+<div class="card" data-lang="all">
+<h3>1. Hello World - First Program for Beginners</h3>
+<div class="tabs">
+<span class="tab active" onclick="showCode(this,'py1')">Python</span>
+<span class="tab" onclick="showCode(this,'java1')">Java</span>
+<span class="tab" onclick="showCode(this,'c1')">C</span>
+<span class="tab" onclick="showCode(this,'cpp1')">C++</span>
+<span class="tab" onclick="showCode(this,'js1')">JS</span>
 </div>
 
-<div class="card">
-<h3>2. Add Two Numbers</h3>
-<p>Add two numbers taken from user</p>
-<pre id="code2">a = int(input("Enter first number: "))
-b = int(input("Enter second number: "))
-print("Sum is:", a+b)</pre>
-<button class="btn" onclick="copyCode('code2')">Copy Code</button>
+<pre id="py1" class="show">print("Hello NIAT, By NIATians")</pre>
+<pre id="java1">public class Main {
+  public static void main(String[] args) {
+    System.out.println("Hello NIAT, By NIATians");
+  }
+}</pre>
+<pre id="c1">#include <stdio.h>
+int main() {
+  printf("Hello NIAT, By NIATians");
+  return 0;
+}</pre>
+<pre id="cpp1">#include <iostream>
+using namespace std;
+int main() {
+  cout << "Hello NIAT, By NIATians";
+  return 0;
+}</pre>
+<pre id="js1">console.log("Hello NIAT, By NIATians");</pre>
+
+<button class="btn" onclick="copyCurrent(this)">Copy Code</button>
+
+<div class="explain">
+<b>🧠 Explanation:</b> Prathi language lo first program ide mawa. Screen meeda text print cheyadaniki use chestam. Beginners ki syntax ela untadi ani artham avuthadi.
 </div>
 
-<div class="card">
-<h3>3. Even or Odd</h3>
-<p>Check number is even or odd</p>
-<pre id="code3">n = int(input("Enter number: "))
+<div class="qa">
+<details><summary>Q: Why print() in Python but System.out.println in Java?</summary>Python simple & beginner friendly, Java object-oriented kabatti System class use chestam mawa.</details>
+<details><summary>Q: Output enti vastadi?</summary>Hello NIAT, By NIATians ani output vastadi.</details>
+<details><summary>Q: Common Error enti?</summary>Python lo bracket miss avvadam, Java lo semicolon marchipovadam.</details>
+</div>
+</div>
+
+<!-- 2. EVEN ODD -->
+<div class="card" data-lang="all">
+<h3>2. Even or Odd - Logic Building</h3>
+<div class="tabs">
+<span class="tab active" onclick="showCode(this,'py2')">Python</span>
+<span class="tab" onclick="showCode(this,'java2')">Java</span>
+<span class="tab" onclick="showCode(this,'c2')">C</span>
+</div>
+
+<pre id="py2" class="show">n = int(input("Enter number: "))
 if n % 2 == 0:
     print("Even")
 else:
     print("Odd")</pre>
-<button class="btn" onclick="copyCode('code3')">Copy Code</button>
+<pre id="java2">import java.util.Scanner;
+class Main {
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    if(n%2==0) System.out.println("Even");
+    else System.out.println("Odd");
+  }
+}</pre>
+<pre id="c2">#include <stdio.h>
+int main(){
+ int n; scanf("%d",&n);
+ if(n%2==0) printf("Even");
+ else printf("Odd");
+ return 0;
+}</pre>
+<button class="btn" onclick="copyCurrent(this)">Copy Code</button>
+<div class="explain"><b>🧠 Logic:</b> % operator remainder chustadi mawa. 2 tho divide cheste 0 vasthe Even, lekapothe Odd.</div>
+<div class="qa">
+<details><summary>Q: % ante enti?</summary>Modulus - division chesaka migilina remainder istadi mawa.</details>
+<details><summary>Q: Real-life use?</summary>Attendance lo roll numbers divide cheyadam, games lo teams divide cheyadam lanti chotla use avuthadi.</details>
 </div>
 </div>
 
+</div>
+
 <script>
-function searchProgram(){
- let input = document.getElementById('search').value.toLowerCase();
- let cards = document.getElementsByClassName('card');
- for(let i=0;i<cards.length;i++){
-   let text = cards[i].innerText.toLowerCase();
-   cards[i].style.display = text.includes(input)? "" : "none";
- }
+let currentLang='all';
+function showCode(el,id){
+ let card=el.closest('.card');
+ card.querySelectorAll('pre').forEach(p=>p.classList.remove('show'));
+ card.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+ document.getElementById(id).classList.add('show');
+ el.classList.add('active');
 }
-function copyCode(id){
- let code = document.getElementById(id).innerText;
+function copyCurrent(btn){
+ let card=btn.closest('.card');
+ let code=card.querySelector('pre.show').innerText;
  navigator.clipboard.writeText(code);
- alert("Copied! ✅");
+ btn.innerText="Copied! ✅";
+ setTimeout(()=>btn.innerText="Copy Code",1500);
+}
+function searchProgram(){
+ let q=document.getElementById('search').value.toLowerCase();
+ document.querySelectorAll('.card').forEach(card=>{
+   let text=card.innerText.toLowerCase();
+   let langOk = currentLang==='all' || card.dataset.lang===currentLang || text.includes(currentLang);
+   let searchOk = text.includes(q);
+   card.style.display = (langOk && searchOk) ? "" : "none";
+ });
+}
+function filterLang(lang,btn){
+ currentLang=lang;
+ document.querySelectorAll('.lang-btns button').forEach(b=>b.classList.remove('active'));
+ btn.classList.add('active');
+ searchProgram();
 }
 </script>
 
