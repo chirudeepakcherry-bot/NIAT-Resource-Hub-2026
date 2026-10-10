@@ -3,153 +3,207 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIAT Code Tutor - All Languages</title>
+<title>NIAT Code Tutor - ChatGPT Style</title>
 <style>
-body{font-family:Arial;background:#0f172a;color:white;padding:20px;margin:0}
-a{color:#60a5fa;text-decoration:none}
-.header{text-align:center;background:#1e293b;padding:20px;border-radius:15px;position:sticky;top:0;z-index:10}
-.search-box{width:90%;max-width:500px;padding:14px;border-radius:12px;border:none;margin:15px 0;font-size:16px}
-.lang-btns button{padding:8px 15px;margin:5px;border:none;border-radius:20px;background:#334155;color:white;cursor:pointer}
-.lang-btns button.active{background:#3b82f6}
-.card{background:#1e293b;padding:20px;margin:20px 0;border-radius:15px;border-left:5px solid #3b82f6}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
-.tab{padding:6px 12px;background:#334155;border-radius:8px;cursor:pointer;font-size:13px}
-.tab.active{background:#3b82f6}
-pre{background:#020617;padding:15px;border-radius:8px;overflow-x:auto;display:none}
-pre.show{display:block}
-.btn{background:#3b82f6;color:white;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;margin:5px 5px 0 0}
-.explain{background:#0f172a;padding:12px;border-radius:8px;margin:10px 0;font-size:14px;line-height:1.6}
-.qa{margin-top:12px}
-.qa details{background:#020617;padding:10px;border-radius:8px;margin:6px 0}
-.qa summary{cursor:pointer;color:#93c5fd;font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+body{background:#0b0f1a;color:white;height:100vh;display:flex;flex-direction:column}
+.header{background:#151a2c;padding:15px;text-align:center;border-bottom:1px solid #222}
+.header a{color:#60a5fa;text-decoration:none;font-size:14px}
+.chat-container{flex:1;overflow-y:auto;padding:20px;max-width:900px;margin:0 auto;width:100%}
+.msg{margin:15px 0;display:flex;gap:10px}
+.msg.user{justify-content:flex-end}
+.bubble{padding:14px 18px;border-radius:18px;max-width:85%;line-height:1.6;font-size:15px}
+.user .bubble{background:#3b82f6;color:white;border-bottom-right-radius:5px}
+.bot .bubble{background:#1e293b;color:#e2e8f0;border-bottom-left-radius:5px;border:1px solid #2a344e}
+pre{background:#020617;color:#a5f3fc;padding:14px;border-radius:10px;margin:10px 0;overflow-x:auto;position:relative}
+.copy-btn{position:absolute;top:8px;right:8px;background:#334155;border:none;color:white;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:12px}
+.input-area{background:#151a2c;padding:15px;display:flex;gap:10px;align-items:center;border-top:1px solid #222;position:sticky;bottom:0}
+.input-area input{flex:1;padding:14px 18px;border-radius:25px;border:none;background:#1e293b;color:white;font-size:15px;outline:none}
+.input-area button{background:#3b82f6;border:none;color:white;padding:12px 20px;border-radius:25px;cursor:pointer;font-weight:bold}
+.quick-btns{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.quick-btns button{background:#1e293b;border:1px solid #334155;color:#94a3b8;padding:6px 14px;border-radius:20px;cursor:pointer;font-size:13px}
+.quick-btns button:hover{background:#3b82f6;color:white}
+.tag{font-size:11px;background:#3b82f6;padding:3px 8px;border-radius:10px;margin-left:8px}
 </style>
 </head>
 <body>
 
 <div class="header">
-<a href="index.html">⬅ Back to Home</a>
-<h1>🤖 NIAT Code Tutor - Learn Like ChatGPT</h1>
-<input type="text" id="search" class="search-box" onkeyup="searchProgram()" placeholder="Search... Type 'hello world', 'even odd', 'factorial'">
-<div class="lang-btns">
-<button class="active" onclick="filterLang('all',this)">All</button>
-<button onclick="filterLang('python',this)">Python</button>
-<button onclick="filterLang('java',this)">Java</button>
-<button onclick="filterLang('c',this)">C</button>
-<button onclick="filterLang('cpp',this)">C++</button>
-<button onclick="filterLang('js',this)">JavaScript</button>
+<a href="index.html">Back to Home</a>
+<h2>NIAT Code Tutor - Ask Anything Like ChatGPT</h2>
+<p style="color:#94a3b8;font-size:13px;margin-top:5px">Ask coding doubts in English - Get instant code with explanation</p>
+</div>
+
+<div class="chat-container" id="chat">
+<div class="msg bot"><div class="bubble">
+<b>Hi! I am your NIAT Coding Assistant</b><br><br>
+You can ask me like:<br>
+- "hello world in python"<br>
+- "even odd program in java"<br>
+- "factorial in c"<br>
+- "why print in python?"<br><br>
+Type your question below!
+</div></div>
+<div class="quick-btns">
+<button onclick="askThis('hello world program')">Hello World</button>
+<button onclick="askThis('even or odd in python')">Even / Odd</button>
+<button onclick="askThis('factorial program')">Factorial</button>
+<button onclick="askThis('fibonacci in python')">Fibonacci</button>
+<button onclick="askThis('palindrome program')">Palindrome</button>
 </div>
 </div>
 
-<div id="programs">
-
-<div class="card" data-lang="all">
-<h3>1. Hello World - First Program for Beginners</h3>
-<div class="tabs">
-<span class="tab active" onclick="showCode(this,'py1')">Python</span>
-<span class="tab" onclick="showCode(this,'java1')">Java</span>
-<span class="tab" onclick="showCode(this,'c1')">C</span>
-<span class="tab" onclick="showCode(this,'cpp1')">C++</span>
-<span class="tab" onclick="showCode(this,'js1')">JS</span>
+<div class="input-area">
+<input type="text" id="userInput" placeholder="Ask anything... Eg: even odd in python" onkeypress="if(event.key==='Enter') sendMsg()">
+<button onclick="sendMsg()">Send</button>
 </div>
-<pre id="py1" class="show">print("Hello NIAT, By NIATians")</pre>
-<pre id="java1">public class Main {
-  public static void main(String[] args) {
+
+<script>
+const knowledge = [
+ {
+  keywords: ["hello","first program"],
+  answer: `
+<b>1. Hello World - First Program</b> <span class="tag">Beginner</span>
+<p style="margin:10px 0;color:#cbd5e1">This is the first program in every language. It prints text on the screen and helps to understand basic syntax.</p>
+<b>Python:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>print("Hello NIAT, By NIATians")</pre>
+<b>Java:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>public class Main {
+  public static void main(String[] args){
     System.out.println("Hello NIAT, By NIATians");
   }
 }</pre>
-<pre id="c1">#include <stdio.h>
-int main() {
+<b>C:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>#include <stdio.h>
+int main(){
   printf("Hello NIAT, By NIATians");
   return 0;
 }</pre>
-<pre id="cpp1">#include <iostream>
-using namespace std;
-int main() {
-  cout << "Hello NIAT, By NIATians";
-  return 0;
-}</pre>
-<pre id="js1">console.log("Hello NIAT, By NIATians");</pre>
-<button class="btn" onclick="copyCurrent(this)">Copy Code</button>
-<div class="explain">
-<b>Explanation:</b> This is the first program in every language. It is used to print text on the screen. It helps beginners understand the basic syntax of a language.
-</div>
-<div class="qa">
-<details><summary>Q: Why print() in Python but System.out.println in Java?</summary>Python is simple and beginner-friendly, so it uses direct print(). Java is object-oriented, so it uses the System class to print.</details>
-<details><summary>Q: What will be the output?</summary>The output will be: Hello NIAT, By NIATians</details>
-<details><summary>Q: What is the common error?</summary>Missing brackets in Python and missing semicolon in Java and C.</details>
-</div>
-</div>
-
-<div class="card" data-lang="all">
-<h3>2. Even or Odd - Logic Building</h3>
-<div class="tabs">
-<span class="tab active" onclick="showCode(this,'py2')">Python</span>
-<span class="tab" onclick="showCode(this,'java2')">Java</span>
-<span class="tab" onclick="showCode(this,'c2')">C</span>
-</div>
-<pre id="py2" class="show">n = int(input("Enter number: "))
+<b>Output:</b> Hello NIAT, By NIATians
+<br><br><b>Common Error:</b> Missing semicolon in C and Java, missing quotes in Python.
+`
+ },
+ {
+  keywords: ["even","odd"],
+  answer: `
+<b>2. Even or Odd Program - Logic Building</b> <span class="tag">Logic</span>
+<p style="margin:10px 0;color:#cbd5e1">We use modulus operator %. If number % 2 == 0, it is Even, otherwise Odd.</p>
+<b>Python:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>n = int(input("Enter number: "))
 if n % 2 == 0:
     print("Even")
 else:
     print("Odd")</pre>
-<pre id="java2">import java.util.Scanner;
-class Main {
-  public static void main(String[] args){
-    Scanner sc = new Scanner(System.in);
-    int n = sc.nextInt();
-    if(n%2==0) System.out.println("Even");
-    else System.out.println("Odd");
-  }
+<b>Java:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>import java.util.Scanner;
+class Main{
+ public static void main(String[] args){
+   Scanner sc = new Scanner(System.in);
+   int n = sc.nextInt();
+   if(n % 2 == 0) System.out.println("Even");
+   else System.out.println("Odd");
+ }
 }</pre>
-<pre id="c2">#include <stdio.h>
+<b>Output:</b> Input 5 -> Odd, Input 4 -> Even
+`
+ },
+ {
+  keywords: ["factorial"],
+  answer: `
+<b>3. Factorial Program</b> <span class="tag">Loop</span>
+<p style="margin:10px 0;color:#cbd5e1">Factorial of 5 = 5*4*3*2*1 = 120. Loop is used to multiply numbers.</p>
+<b>Python:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>n = int(input("Enter number: "))
+fact = 1
+for i in range(1, n+1):
+    fact = fact * i
+print(fact)</pre>
+<b>C:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>#include <stdio.h>
 int main(){
- int n; scanf("%d",&n);
- if(n%2==0) printf("Even");
- else printf("Odd");
+ int n, i, fact=1;
+ scanf("%d",&n);
+ for(i=1;i<=n;i++) fact=fact*i;
+ printf("%d",fact);
  return 0;
 }</pre>
-<button class="btn" onclick="copyCurrent(this)">Copy Code</button>
-<div class="explain"><b>Logic:</b> The % operator gives the remainder. If a number divided by 2 gives remainder 0, it is Even, otherwise it is Odd.</div>
-<div class="qa">
-<details><summary>Q: What does % mean?</summary>It is the modulus operator. It returns the remainder after division.</details>
-<details><summary>Q: Real-life use case?</summary>Used to divide students into groups, check batches, and in game logic.</details>
-</div>
-</div>
+`
+ },
+ {
+  keywords: ["fibonacci"],
+  answer: `
+<b>4. Fibonacci Series</b> <span class="tag">Important</span>
+<p style="margin:10px 0;color:#cbd5e1">Series: 0,1,1,2,3,5,8... Next number is sum of previous two numbers.</p>
+<b>Python:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>n = int(input("How many terms: "))
+a, b = 0, 1
+for i in range(n):
+    print(a)
+    a, b = b, a+b</pre>
+`
+ },
+ {
+  keywords: ["palindrome"],
+  answer: `
+<b>5. Palindrome Check</b> <span class="tag">String Logic</span>
+<p style="margin:10px 0;color:#cbd5e1">Palindrome means string reads same forward and backward. Example: madam, 121</p>
+<b>Python:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>s = input("Enter string: ")
+if s == s[::-1]:
+    print("Palindrome")
+else:
+    print("Not Palindrome")</pre>
+`
+ },
+ {
+  keywords: ["print","system.out","why"],
+  answer: `
+<b>Why different print statements in different languages?</b>
+<br><br><b>Python:</b> print() - Simple and beginner friendly.<br>
+<b>Java:</b> System.out.println() - Java is object oriented, System is a class, out is an object, println is a method.<br>
+<b>C:</b> printf() - Comes from C standard library for formatted printing.<br>
+<br>All perform same task: display text on screen. Syntax differs based on language design.
+`
+ }
+];
 
-</div>
-
-<script>
-let currentLang='all';
-function showCode(el,id){
- let card=el.closest('.card');
- card.querySelectorAll('pre').forEach(p=>p.classList.remove('show'));
- card.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
- document.getElementById(id).classList.add('show');
- el.classList.add('active');
+function sendMsg(){
+ let input = document.getElementById('userInput');
+ let text = input.value.trim();
+ if(!text) return;
+ addMsg(text,'user');
+ input.value='';
+ setTimeout(()=>{ botReply(text) }, 600);
 }
-function copyCurrent(btn){
- let card=btn.closest('.card');
- let code=card.querySelector('pre.show').innerText;
+function askThis(t){ document.getElementById('userInput').value=t; sendMsg(); }
+function addMsg(html,type){
+ let chat = document.getElementById('chat');
+ let div = document.createElement('div');
+ div.className = `msg ${type}`;
+ div.innerHTML = `<div class="bubble">${html}</div>`;
+ chat.appendChild(div);
+ chat.scrollTop = chat.scrollHeight;
+}
+function botReply(q){
+ let lower = q.toLowerCase();
+ let found = null;
+ for(let k of knowledge){
+   if(k.keywords.some(key=> lower.includes(key))){
+     found = k; break;
+   }
+ }
+ if(found){
+   addMsg(found.answer,'bot');
+ } else {
+   addMsg(`I did not understand "<b>${q}</b>" but I can help with:<br><br>- hello world<br>- even odd<br>- factorial<br>- fibonacci<br>- palindrome<br>- why print is different?<br><br>Try typing one of these!`,'bot');
+ }
+}
+function copyCode(btn){
+ let code = btn.parentElement.innerText.replace('Copy','').trim();
  navigator.clipboard.writeText(code);
- btn.innerText="Copied! ✅";
- setTimeout(()=>btn.innerText="Copy Code",1500);
-}
-function searchProgram(){
- let q=document.getElementById('search').value.toLowerCase();
- document.querySelectorAll('.card').forEach(card=>{
-   let text=card.innerText.toLowerCase();
-   let langOk = currentLang==='all' || card.dataset.lang===currentLang || text.includes(currentLang);
-   let searchOk = text.includes(q);
-   card.style.display = (langOk && searchOk) ? "" : "none";
- });
-}
-function filterLang(lang,btn){
- currentLang=lang;
- document.querySelectorAll('.lang-btns button').forEach(b=>b.classList.remove('active'));
- btn.classList.add('active');
- searchProgram();
+ btn.innerText='Copied!';
+ setTimeout(()=>btn.innerText='Copy',1500);
 }
 </script>
-
 </body>
 </html>
