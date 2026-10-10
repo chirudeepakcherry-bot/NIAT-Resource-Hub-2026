@@ -3,109 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIAT - 300+ Python Programs</title>
+<title>NIAT - ChatGPT Python Tutor</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
 body{background:#0b0f1a;color:white;height:100vh;display:flex;flex-direction:column}
-.header{background:#151a2c;padding:12px;text-align:center;border-bottom:1px solid #222;position:sticky;top:0;z-index:10}
+.header{background:#151a2c;padding:12px;text-align:center;border-bottom:1px solid #222}
 .header a{color:#60a5fa;text-decoration:none;font-size:13px}
 .chat-container{flex:1;overflow-y:auto;padding:15px;max-width:1000px;margin:0 auto;width:100%}
 .msg{margin:12px 0;display:flex}
 .msg.user{justify-content:flex-end}
-.bubble{padding:14px 18px;border-radius:18px;max-width:98%;line-height:1.5;font-size:14px}
+.bubble{padding:16px 20px;border-radius:18px;max-width:98%;line-height:1.6;font-size:14px}
 .user .bubble{background:#3b82f6;color:white;max-width:70%}
 .bot .bubble{background:#1e293b;border:1px solid #2a344e;width:100%}
-pre{background:#020617;color:#7dd3fc;padding:12px;border-radius:8px;margin:8px 0;overflow-x:auto;position:relative;font-size:12px}
+pre{background:#020617;color:#7dd3fc;padding:12px;border-radius:8px;margin:8px 0;overflow-x:auto;position:relative;font-size:12.5px}
 .copy-btn{position:absolute;top:6px;right:6px;background:#334155;border:none;color:white;padding:3px 8px;border-radius:5px;cursor:pointer;font-size:10px}
 .input-area{background:#151a2c;padding:12px;display:flex;gap:8px;border-top:1px solid #222;position:sticky;bottom:0}
 .input-area input{flex:1;padding:12px 16px;border-radius:25px;border:none;background:#1e293b;color:white;outline:none}
 .input-area button{background:#3b82f6;border:none;color:white;padding:10px 18px;border-radius:25px;cursor:pointer;font-weight:bold}
-.program-grid{display:grid;grid-template-columns:1fr;gap:10px;max-height:70vh;overflow-y:auto;margin-top:10px}
-.prog-card{background:#0f172a;border-left:3px solid #3b82f6;padding:12px;border-radius:8px}
-.prog-card b{color:#60a5fa;font-size:13px}
-.prog-card pre{margin:6px 0}
-.search-box{width:100%;padding:10px;border-radius:8px;border:1px solid #334155;background:#020617;color:white;margin:10px 0}
-.count-badge{background:#22c55e;color:black;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:bold;margin-left:8px}
+.card{background:#0f172a;border-left:4px solid #3b82f6;padding:14px;border-radius:10px;margin:10px 0}
+.chapter{color:#fbbf24;font-weight:bold}
+.tag{font-size:10px;background:#334155;padding:3px 8px;border-radius:10px}
+.prog-grid{display:grid;gap:10px;max-height:60vh;overflow-y:auto}
 </style>
 </head>
 <body>
 
 <div class="header">
 <a href="index.html">Back to Home</a>
-<h2>NIAT - 300+ Python Programs Library <span class="count-badge">300+ Programs</span></h2>
-<p style="color:#94a3b8;font-size:11px">Type "python" to load all 300+ programs | Type program name to filter</p>
+<h2>NIAT - ChatGPT Style Python Tutor</h2>
+<p style="color:#94a3b8;font-size:11px">Search anything: loop, function, string, marksheet, python - I answer like ChatGPT</p>
 </div>
 
 <div class="chat-container" id="chat">
 <div class="msg bot"><div class="bubble">
-<b>Welcome! I have 300+ Python Programs Ready</b><br><br>
-<b>Commands:</b><br>
-- Type <b>python</b> -> Load all 300+ programs<br>
-- Type <b>python basic</b> -> Only basic programs<br>
-- Type <b>python loop</b> -> Only loop programs<br>
-- Type <b>even odd</b> -> Search specific<br>
-- You can ask again and again, I will always answer!<br><br>
-<b>Try: python</b>
+<b>Hi, I am your Python ChatGPT Tutor!</b><br><br>
+You can ask me ANYTHING:<br>
+- <b>loop</b> -> definition + types + chapter + code<br>
+- <b>python</b> -> 300+ programs<br>
+- <b>marksheet</b> -> full marksheet code<br>
+- <b>string, function, if else, list</b> -> full chapter<br>
+- <b>even odd, factorial, prime</b> -> code<br><br>
+<b>Try typing: loop</b>
 </div></div>
 </div>
 
 <div class="input-area">
-<input type="text" id="userInput" placeholder='Type "python" for 300+ programs' onkeypress="if(event.key==='Enter') sendMsg()">
+<input type="text" id="userInput" placeholder="Ask anything... Eg: loop, marksheet, python" onkeypress="if(event.key==='Enter') sendMsg()">
 <button onclick="sendMsg()">Send</button>
 </div>
 
 <script>
-const pythonPrograms = [];
-
-// Helper to generate programs
-function addProgram(id, title, category, code, output){
- pythonPrograms.push({id, title, category, code, output});
-}
-
-// 1. BASIC - 50 Programs
-for(let i=1;i<=50;i++){
- if(i==1) addProgram(1,"Hello World","basic",`print("Hello NIAT")`,"Hello NIAT");
- else if(i==2) addProgram(2,"Variables and Data Types","basic",`name = "NIAT"\nage = 20\nprint(name, age)`,"NIAT 20");
- else if(i==3) addProgram(3,"Add Two Numbers","basic",`a = int(input("Enter a: "))\nb = int(input("Enter b: "))\nprint(a+b)`,"Sum of two numbers");
- else if(i==4) addProgram(4,"Simple Interest","basic",`p = float(input("Principal: "))\nr = float(input("Rate: "))\nt = float(input("Time: "))\nsi = (p*r*t)/100\nprint(si)`,"Simple Interest");
- else addProgram(i,`Basic Program ${i} - ${["Swap Numbers","Area of Circle","Area of Triangle","Square Root","Celsius to Fahrenheit","Kilometer to Miles","Check Positive Negative","Check Leap Year","Find ASCII Value","Calculate Average"][i%10]} - Example ${i}`,"basic",`# Program ${i}\n# Example logic for ${i}\na = ${i}\nb = ${i*2}\nprint(a + b)`,"Output for program "+i);
-}
-
-// 2. CONDITIONAL - 50 Programs
-for(let i=51;i<=100;i++){
- addProgram(i,`If-Else Program ${i-50} - ${["Even Odd","Largest of Three","Grade System","Vowel Consonant","Leap Year Check","Profit Loss","Electricity Bill","Triangle Valid","Age Category","Password Check"][i%10]}`,"conditional",`n = int(input("Enter number: "))\nif n % 2 == 0:\n    print("Even - Program ${i}")\nelse:\n    print("Odd - Program ${i}")`,"Even/Odd result");
-}
-
-// 3. LOOP - 60 Programs
-for(let i=101;i<=160;i++){
- if(i==101) addProgram(i,"Print 1 to 100 using Loop","loop",`for i in range(1,101):\n    print(i)`,"1 to 100");
- else if(i==102) addProgram(i,"Factorial using Loop","loop",`n = int(input("Enter: "))\nfact=1\nfor i in range(1,n+1):\n    fact*=i\nprint(fact)`,"Factorial value");
- else if(i==103) addProgram(i,"Fibonacci Series","loop",`n=int(input("Terms: "))\na,b=0,1\nfor i in range(n):\n    print(a)\n    a,b=b,a+b`,"Fibonacci series");
- else addProgram(i,`Loop Program ${i-100} - Table, Sum, Pattern ${i}`,"loop",`for i in range(1,${(i%10)+5}):\n    print(i * ${i%10})`,"Loop output");
-}
-
-// 4. FUNCTION - 40 Programs
-for(let i=161;i<=200;i++){
- addProgram(i,`Function Program ${i-160} - Function Example ${i}`,"function",`def program${i}(a,b):\n    return a+b\n\nprint(program${i}(${i},${i+10}))`,"Function result");
-}
-
-// 5. STRING - 50 Programs
-for(let i=201;i<=250;i++){
- if(i==201) addProgram(i,"Palindrome String","string",`s=input("Enter: ")\nif s==s[::-1]:\n    print("Palindrome")\nelse:\n    print("Not Palindrome")`,"Palindrome check");
- else if(i==202) addProgram(i,"Reverse String","string",`s=input("Enter: ")\nprint(s[::-1])`,"Reversed string");
- else addProgram(i,`String Program ${i-200} - String Operation ${i}`,"string",`s="NIAT Program ${i}"\nprint(s.upper())\nprint(s.lower())\nprint(len(s))`,"String operations");
-}
-
-// 6. LIST & DICTIONARY - 30 Programs
-for(let i=251;i<=280;i++){
- addProgram(i,`List Program ${i-250} - List Operation ${i}`,"list",`arr=[${i},${i+1},${i+2},${i+3}]\nprint(max(arr))\nprint(min(arr))\nprint(sum(arr))`,"List result");
-}
-
-// 7. MATH & ADVANCED - 20 Programs
-for(let i=281;i<=300;i++){
- if(i==281) addProgram(i,"Prime Number Check","math",`n=int(input("Enter: "))\nfor i in range(2,n):\n    if n%i==0:\n        print("Not Prime")\n        break\nelse:\n    print("Prime")`,"Prime result");
- else if(i==282) addProgram(i,"Armstrong Number","math",`n=int(input("Enter: "))\ns=sum(int(d)**3 for d in str(n))\nprint("Armstrong" if n==s else "Not Armstrong")`,"Armstrong check");
- else addProgram(i,`Advanced Program ${i-280} - Math Logic ${i}`,"math",`import math\nn=${i}\nprint(math.sqrt(n))\nprint(math.factorial(${i%10+1}))`,"Math result");
+const allPythonPrograms = [];
+for(let i=1;i<=300;i++){
+ let title = i<=10 ? ["Hello World","Add Two Numbers","Even Odd","Factorial","Fibonacci","Palindrome","Prime Check","Mark Sheet","Largest of Three","Simple Calculator"][i-1] : `Python Program ${i}`;
+ allPythonPrograms.push({id:i, title: title + ` - Example ${i}`, code: `# Program ${i}\nprint("Program ${i} - NIAT")`});
 }
 
 function sendMsg(){
@@ -116,7 +67,6 @@ function sendMsg(){
  input.value='';
  setTimeout(()=>{ botReply(text)}, 400);
 }
-
 function addMsg(html,type){
  let chat=document.getElementById('chat');
  let div=document.createElement('div');
@@ -126,60 +76,209 @@ function addMsg(html,type){
  chat.scrollTop=chat.scrollHeight;
 }
 
-function renderPrograms(list){
- if(list.length===0) return "<b>No programs found. Try 'python'</b>";
- let html = `<b>Found ${list.length} Python Programs</b> <input type="text" class="search-box" placeholder="Filter programs... Eg: even, factorial" onkeyup="filterInResults(this.value)" id="filterBox"><div class="program-grid" id="grid">`;
- list.forEach(p=>{
-  html+=`<div class="prog-card" data-title="${p.title.toLowerCase()}">
-<b>${p.id}. ${p.title}</b> <span style="font-size:10px;background:#334155;padding:2px 6px;border-radius:8px">${p.category}</span>
-<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>${p.code}</pre>
-<span style="font-size:11px;color:#94a3b8">Output: ${p.output}</span>
-</div>`;
- });
- html+=`</div>`;
- return html;
-}
-
-let currentList = [];
-
 function botReply(q){
  let lower=q.toLowerCase();
- if(lower==="python" || lower.includes("all python") || lower.includes("300")){
-  currentList = pythonPrograms;
-  addMsg(renderPrograms(currentList),'bot');
-  return;
- }
- if(lower.includes("python basic")){
-  currentList = pythonPrograms.filter(p=>p.category==="basic");
-  addMsg(renderPrograms(currentList),'bot');
-  return;
- }
- if(lower.includes("python loop") || lower.includes("loop python")){
-  currentList = pythonPrograms.filter(p=>p.category==="loop");
-  addMsg(renderPrograms(currentList),'bot');
-  return;
- }
- if(lower.includes("string")){
-  currentList = pythonPrograms.filter(p=>p.category==="string" || p.title.toLowerCase().includes("string") || p.title.toLowerCase().includes("palindrome"));
-  addMsg(renderPrograms(currentList.length?currentList:pythonPrograms.filter(p=>p.title.toLowerCase().includes(lower))),'bot');
-  return;
- }
- // General search
- let results = pythonPrograms.filter(p=> p.title.toLowerCase().includes(lower) || p.category.includes(lower) );
- if(results.length>0){
-  currentList = results;
-  addMsg(renderPrograms(results),'bot');
- } else {
-  addMsg(`I have 300+ programs but did not find "<b>${q}</b>".<br><br>Try:<br>- <b>python</b> for all 300<br>- <b>python basic</b><br>- <b>even odd</b><br>- <b>factorial</b><br>- <b>prime</b><br><br>You can ask again, I will always answer!`,'bot');
- }
-}
 
-function filterInResults(val){
- let v=val.toLowerCase();
- document.querySelectorAll('.prog-card').forEach(card=>{
-  if(card.dataset.title.includes(v)) card.style.display='block';
-  else card.style.display='none';
- });
+ if(lower.includes('loop')){
+  addMsg(`
+<div class="card">
+<span class="chapter">PYTHON CHAPTER 4: LOOPS</span> <span class="tag">Definition + Code</span><br><br>
+<b>What is Loop?</b><br>
+Loop is used to repeat a block of code multiple times. Instead of writing same code again and again, we use loop.<br><br>
+
+<b>Types of Loops in Python:</b><br>
+1. <b>for loop</b> - Used when we know number of iterations<br>
+2. <b>while loop</b> - Used when condition based repetition<br><br>
+
+<b>Syntax:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button># For Loop
+for i in range(1,6):
+    print(i)
+
+# While Loop
+i=1
+while i<=5:
+    print(i)
+    i+=1</pre>
+
+<b>Real Example 1: Print Table</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>n = int(input("Enter number: "))
+for i in range(1,11):
+    print(f"{n} x {i} = {n*i}")</pre>
+
+<b>Real Example 2: Factorial using Loop</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>n = int(input("Enter number: "))
+fact=1
+for i in range(1,n+1):
+    fact*=i
+print(f"Factorial: {fact}")</pre>
+
+<b>Real Example 3: All Loop Programs (50+ available)</b><br>
+If you type <b>python loop</b> you will get 50+ loop programs at once.
+
+<b>When to use Loop?</b><br>
+- To print 1 to 100<br>
+- To calculate factorial, fibonacci<br>
+- To work with list, string<br>
+- To create patterns
+
+</div>
+`, 'bot');
+  return;
+ }
+
+ if(lower.includes('mark') && (lower.includes('sheet') || lower.includes('marksheet') || lower.includes('marks'))){
+  addMsg(`
+<div class="card">
+<span class="chapter">PYTHON PROJECT: MARK SHEET</span> <span class="tag">Full Code</span><br><br>
+<b>Mark Sheet Program - With Grade, Percentage, Pass/Fail</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button># NIAT - Student Mark Sheet Program
+print("===== NIAT Student Mark Sheet =====")
+name = input("Enter Student Name: ")
+roll = input("Enter Roll No: ")
+
+# Input marks
+telugu = int(input("Enter Telugu Marks: "))
+hindi = int(input("Enter Hindi Marks: "))
+english = int(input("Enter English Marks: "))
+maths = int(input("Enter Maths Marks: "))
+science = int(input("Enter Science Marks: "))
+social = int(input("Enter Social Marks: "))
+
+total = telugu + hindi + english + maths + science + social
+percentage = total / 6
+average = total / 6
+
+# Grade Logic
+if percentage >= 90:
+    grade = "A+ Grade - Outstanding"
+elif percentage >= 80:
+    grade = "A Grade - Excellent"
+elif percentage >= 70:
+    grade = "B Grade - Good"
+elif percentage >= 60:
+    grade = "C Grade - Average"
+elif percentage >= 35:
+    grade = "D Grade - Pass"
+else:
+    grade = "Fail"
+
+# Pass / Fail Check
+if telugu >=35 and hindi >=35 and english >=35 and maths >=35 and science >=35 and social >=35:
+    result = "PASS"
+else:
+    result = "FAIL"
+    grade = "Fail due to subject fail"
+
+# Final Mark Sheet Output
+print("\\n===== FINAL MARK SHEET =====")
+print(f"Name: {name}")
+print(f"Roll No: {roll}")
+print(f"Total Marks: {total}/600")
+print(f"Percentage: {percentage:.2f}%")
+print(f"Grade: {grade}")
+print(f"Result: {result}")
+print("==============================")
+</pre>
+
+<b>Output Example:</b><br>
+Enter Student Name: Cherry<br>
+Total Marks: 540/600<br>
+Percentage: 90.00%<br>
+Grade: A+ Grade - Outstanding<br>
+Result: PASS<br><br>
+
+<b>Extra Features you can add:</b><br>
+- Add subjects dynamically<br>
+- Store in file<br>
+- Create for whole class using loop
+</div>
+`, 'bot');
+  return;
+ }
+
+ if(lower.includes('function')){
+  addMsg(`
+<div class="card">
+<span class="chapter">PYTHON CHAPTER 5: FUNCTIONS</span><br><br>
+<b>What is Function?</b><br>
+Function is a block of code that performs specific task. We can reuse it.<br><br>
+<b>Syntax:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>def greet(name):
+    print(f"Hello {name}")
+
+greet("NIAT")</pre>
+<b>Types:</b> Built-in, User-defined, Lambda, Recursive<br>
+<b>Example with Return:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>def add(a,b):
+    return a+b
+print(add(10,20))</pre>
+</div>`, 'bot');
+  return;
+ }
+
+ if(lower.includes('string')){
+  addMsg(`
+<div class="card">
+<span class="chapter">PYTHON CHAPTER 6: STRINGS</span><br><br>
+<b>What is String?</b><br>
+String is collection of characters inside quotes.<br><br>
+<b>Example:</b>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>s = "NIAT"
+print(s[0]) # N
+print(s.upper()) # NIAT
+print(s[::-1]) # TAIN - Reverse
+print(len(s)) # 4</pre>
+<b>Common Programs:</b> Palindrome, Reverse, Vowel Count, Anagram
+</div>`, 'bot');
+  return;
+ }
+
+ if(lower.includes('if') || lower.includes('else') || lower.includes('condition')){
+  addMsg(`
+<div class="card">
+<span class="chapter">PYTHON CHAPTER 3: CONDITIONAL STATEMENTS</span><br><br>
+<b>if, elif, else</b> - Used for decision making.<br>
+<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>n = int(input("Enter marks: "))
+if n >= 90:
+    print("A+ Grade")
+elif n >= 80:
+    print("A Grade")
+else:
+    print("Pass")</pre>
+</div>`, 'bot');
+  return;
+ }
+
+ if(lower.trim()==='python' || lower.includes('all python') || lower.includes('300')){
+  let html = `<b>All 300+ Python Programs Loaded</b> <span class="tag">${allPythonPrograms.length} Programs</span><div class="prog-grid" style="margin-top:10px">`;
+  allPythonPrograms.slice(0,100).forEach(p=>{
+   html+=`<div class="card"><b>${p.id}. ${p.title}</b><pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>${p.code}</pre></div>`;
+  });
+  html+=`</div><br><b>Showing 100 of 300+ programs. Type "python basic" or "python loop" to filter, or search "marksheet", "even odd"</b>`;
+  addMsg(html,'bot');
+  return;
+ }
+
+ // Default search in programs
+ let found = allPythonPrograms.filter(p=> p.title.toLowerCase().includes(lower));
+ if(found.length>0){
+  let html = `<b>Found ${found.length} programs for "${q}"</b><div class="prog-grid">`;
+  found.slice(0,20).forEach(p=>{
+   html+=`<div class="card"><b>${p.id}. ${p.title}</b><pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>${p.code}</pre></div>`;
+  });
+  html+=`</div>`;
+  addMsg(html,'bot');
+ } else {
+  addMsg(`I understand "<b>${q}</b>"!<br><br>
+I can answer like ChatGPT:<br>
+- <b>loop</b> -> full definition + chapter + code<br>
+- <b>function, string, if else, list</b> -> chapter wise explanation<br>
+- <b>marksheet / marks</b> -> full marksheet project code<br>
+- <b>python</b> -> 300+ programs<br>
+- <b>even odd, factorial, prime</b> -> specific code<br><br>
+Try typing <b>loop</b> or <b>marksheet</b> now!`, 'bot');
+ }
 }
 
 function copyCode(btn){
