@@ -89,21 +89,28 @@ for(let i=1;i<=300;i++){
  let title = i<=10 ? ["Hello World","Add Two Numbers","Even Odd","Factorial","Fibonacci","Palindrome","Prime Check","Mark Sheet","Largest of Three","Simple Calculator"][i-1] : `Python Program ${i}`;
  allPythonPrograms.push({id:i, title: title + ` - Example ${i}`, code: `# Program ${i}\nprint("Program ${i} - NIAT")`});
 }
-
 function sendMsg(){
-  let msg = document.getElementById("userInput").value.trim();
+  let input = document.getElementById("userInput");
+  let msg = input.value.trim();
   if(msg == "") return;
-  
-  addUserMessage(msg);
-  document.getElementById("userInput").value = "";
+
+  let chat = document.querySelector(".chat-container") || document.body;
+
+  let userDiv = document.createElement("div");
+  userDiv.innerHTML = "<b>You:</b> " + msg;
+  userDiv.style.cssText = "background:#2563eb;color:white;padding:12px;margin:10px;border-radius:12px;";
+  chat.appendChild(userDiv);
+
+  input.value = "";
 
   if(msg.toLowerCase() == "python"){
-    addBotMessage(getPythonPrograms());
+    let botDiv = document.createElement("div");
+    botDiv.innerHTML = getPythonPrograms();
+    botDiv.style.cssText = "background:#1e293b;color:white;padding:15px;margin:10px;border-radius:12px;line-height:1.6;";
+    chat.appendChild(botDiv);
+    window.scrollTo(0, document.body.scrollHeight);
     return;
   }
-
-  // nee old answer code motham ikkada undanivvu
-}
  let text=input.value.trim();
  if(!text) return;
  addMsg(text,'user');
