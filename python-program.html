@@ -57,6 +57,33 @@ You can ask me ANYTHING:<br>
     <button class="arrow-btn" onclick="sendMsg()">↑</button>
   </div>
 <script>
+  function getPythonPrograms(){
+  return `
+<b>Python All Programs List (300+)</b><br><br>
+<b>1. Basic Programs:</b><br>
+1. Hello World<br>2. Add Two Numbers<br>3. Swap Two Numbers<br>4. Even or Odd<br>5. Positive Negative Zero<br>6. Largest of 3 Numbers<br>7. Factorial<br>8. Prime Number<br>9. Fibonacci Series<br>10. Reverse Number<br><br>
+
+<b>2. Loop Programs:</b><br>
+11. Print 1 to 100 using for loop<br>12. Print 1 to 100 using while loop<br>13. Multiplication Table<br>14. Sum of Natural Numbers<br>15. Armstrong Number<br>16. Palindrome Number<br>17. Count Digits<br>18. Sum of Digits<br><br>
+
+<b>3. String Programs:</b><br>
+19. Reverse String<br>20. Palindrome String<br>21. Count Vowels<br>22. Count Words<br>23. Remove Spaces<br>24. Upper to Lower<br><br>
+
+<b>4. List Programs:</b><br>
+25. Largest in List<br>26. Smallest in List<br>27. Sum of List<br>28. Sort List<br>29. Remove Duplicates<br><br>
+
+<b>5. Function Programs:</b><br>
+30. Add using Function<br>31. Factorial using Function<br>32. Prime using Function<br><br>
+
+<b>6. Pattern Programs:</b><br>
+33. Star Pattern<br>34. Pyramid Pattern<br>35. Number Pattern<br><br>
+
+<b>7. Important Exam Programs:</b><br>
+36. Marksheet Program<br>37. Calculator Program<br>38. Grade System<br>39. Leap Year<br>40. GCD and LCM<br><br>
+
+<i>Type any name: factorial, prime, loop, marksheet - I will give full code</i>
+  `;
+}
 const allPythonPrograms = [];
 for(let i=1;i<=300;i++){
  let title = i<=10 ? ["Hello World","Add Two Numbers","Even Odd","Factorial","Fibonacci","Palindrome","Prime Check","Mark Sheet","Largest of Three","Simple Calculator"][i-1] : `Python Program ${i}`;
@@ -64,7 +91,19 @@ for(let i=1;i<=300;i++){
 }
 
 function sendMsg(){
- let input=document.getElementById('userInput');
+  let msg = document.getElementById("userInput").value.trim();
+  if(msg == "") return;
+  
+  addUserMessage(msg);
+  document.getElementById("userInput").value = "";
+
+  if(msg.toLowerCase() == "python"){
+    addBotMessage(getPythonPrograms());
+    return;
+  }
+
+  // nee old answer code motham ikkada undanivvu
+}
  let text=input.value.trim();
  if(!text) return;
  addMsg(text,'user');
