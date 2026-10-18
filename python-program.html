@@ -55,384 +55,66 @@ You can ask me ANYTHING:<br>
   <div class="search-bar">
     <input type="text" id="userInput" placeholder="Ask ChatGPT" onkeypress="if(event.key==='Enter') sendMsg()">
     <button class="arrow-btn" onclick="sendMsg()">↑</button>
-  </div>let ans = getProgramAnswer(msg);
-if(ans){
-  let botDiv = document.createElement("div");
-  botDiv.innerHTML = ans;
-  botDiv.style.cssText = "background:#1e293b;color:white;padding:15px;margin:10px;border-radius:12px;line-height:1.6;";
-  chat.appendChild(botDiv);
-  return;
+    <script>
+function getPythonPrograms(){
+  return `<b>Python Programs List</b><br><br>
+    1. Hello World<br>2. Add Two Numbers<br>3. Even or Odd<br>
+    4. Factorial<br>5. Prime Number<br>6. Fibonacci<br>
+    7. Reverse Number<br>8. Palindrome<br>9. Armstrong<br>
+    10. Marksheet<br>11. Calculator<br><br>
+  <i>Type: hello world, factorial, prime...</i>`;
 }
-<script>
-  function getPythonPrograms(){
-  return
-  function getProgramAnswer(msg){
+
+function getProgramAnswer(msg){
   msg = msg.toLowerCase();
-  
   const programs = {
-    "hello world": `<b>Hello World Program</b><pre>print("Hello World")</pre><b>Output:</b> Hello World`,
-    
-    "add two numbers": `<b>Add Two Numbers</b><pre>a = int(input("Enter a: "))
-b = int(input("Enter b: "))
-print("Sum =", a+b)</pre>`,
-    
-    "even or odd": `<b>Even or Odd</b><pre>n = int(input("Enter number: "))
-if n % 2 == 0:
-    print("Even")
-else:
-    print("Odd")</pre>`,
-    
-    "factorial": `<b>Factorial Program</b><pre>n = int(input("Enter number: "))
-fact = 1
-for i in range(1, n+1):
-    fact = fact * i
-print("Factorial =", fact)</pre>`,
-    
-    "prime": `<b>Prime Number</b><pre>n = int(input("Enter number: "))
-is_prime = True
-for i in range(2, n):
-    if n % i == 0:
-        is_prime = False
-        break
-print("Prime" if is_prime and n>1 else "Not Prime")</pre>`,
-    
-    "fibonacci": `<b>Fibonacci Series</b><pre>n = int(input("Enter terms: "))
-a, b = 0, 1
-for i in range(n):
-    print(a, end=" ")
-    a, b = b, a+b</pre>`,
-    
-    "reverse number": `<b>Reverse Number</b><pre>n = int(input("Enter number: "))
-rev = 0
-while n > 0:
-    rev = rev*10 + n%10
-    n = n//10
-print("Reverse =", rev)</pre>`,
-    
-    "palindrome": `<b>Palindrome Number</b><pre>n = int(input("Enter number: "))
-temp = n
-rev = 0
-while n > 0:
-    rev = rev*10 + n%10
-    n = n//10
-print("Palindrome" if temp==rev else "Not Palindrome")</pre>`,
-    
-    "armstrong": `<b>Armstrong Number</b><pre>n = int(input("Enter number: "))
-temp = n
-s = 0
-while n > 0:
-    d = n%10
-    s = s + d**3
-    n = n//10
-print("Armstrong" if temp==s else "Not Armstrong")</pre>`,
-    
-    "largest": `<b>Largest of 3 Numbers</b><pre>a,b,c = 10,25,15
-print("Largest =", max(a,b,c))</pre>`,
-    
-    "leap year": `<b>Leap Year</b><pre>year = int(input("Enter year: "))
-if (year%4==0 and year%100!=0) or (year%400==0):
-    print("Leap Year")
-else:
-    print("Not Leap Year")</pre>`,
-    
-    "marksheet": `<b>Marksheet Program</b><pre>name = input("Enter name: ")
-m1,m2,m3 = 80,90,85
-total = m1+m2+m3
-print(name, "Total =", total, "Average =", total/3)</pre>`,
-    
-    "calculator": `<b>Calculator Program</b><pre>a = int(input("Enter a: "))
-b = int(input("Enter b: "))
-print("Add:",a+b)
-print("Sub:",a-b)
-print("Mul:",a*b)
-print("Div:",a/b)</pre>`
+    "hello world": `<b>Hello World</b><pre>print("Hello World")</pre>`,
+    "add two numbers": `<b>Add Two Numbers</b><pre>a=int(input("Enter a: "))
+b=int(input("Enter b: "))
+print(a+b)</pre>`,
+    "even or odd": `<b>Even or Odd</b><pre>n=int(input("Enter number: "))
+print("Even" if n%2==0 else "Odd")</pre>`,
+    "factorial": `<b>Factorial</b><pre>n=int(input("Enter number: "))
+f=1
+for i in range(1,n+1): f*=i
+print(f)</pre>`,
+    "prime": `<b>Prime Number</b><pre>n=int(input("Enter number: "))
+p=True
+for i in range(2,n):
+ if n%i==0: p=False
+print("Prime" if p and n>1 else "Not Prime")</pre>`,
+    "marksheet": `<b>Marksheet</b><pre>m1,m2,m3=80,90,85
+print("Total:",m1+m2+m3)</pre>`
   };
-
-  for(let key in programs){
-    if(msg.includes(key)){
-      return programs[key];
-    }
-  }
+  for(let k in programs){ if(msg.includes(k)) return programs[k]; }
   return null;
-}  
-<b>Python All Programs List (300+)</b><br><br>
-<b>1. Basic Programs:</b><br>
-1. Hello World<br>2. Add Two Numbers<br>3. Swap Two Numbers<br>4. Even or Odd<br>5. Positive Negative Zero<br>6. Largest of 3 Numbers<br>7. Factorial<br>8. Prime Number<br>9. Fibonacci Series<br>10. Reverse Number<br><br>
-
-<b>2. Loop Programs:</b><br>
-11. Print 1 to 100 using for loop<br>12. Print 1 to 100 using while loop<br>13. Multiplication Table<br>14. Sum of Natural Numbers<br>15. Armstrong Number<br>16. Palindrome Number<br>17. Count Digits<br>18. Sum of Digits<br><br>
-
-<b>3. String Programs:</b><br>
-19. Reverse String<br>20. Palindrome String<br>21. Count Vowels<br>22. Count Words<br>23. Remove Spaces<br>24. Upper to Lower<br><br>
-
-<b>4. List Programs:</b><br>
-25. Largest in List<br>26. Smallest in List<br>27. Sum of List<br>28. Sort List<br>29. Remove Duplicates<br><br>
-
-<b>5. Function Programs:</b><br>
-30. Add using Function<br>31. Factorial using Function<br>32. Prime using Function<br><br>
-
-<b>6. Pattern Programs:</b><br>
-33. Star Pattern<br>34. Pyramid Pattern<br>35. Number Pattern<br><br>
-
-<b>7. Important Exam Programs:</b><br>
-36. Marksheet Program<br>37. Calculator Program<br>38. Grade System<br>39. Leap Year<br>40. GCD and LCM<br><br>
-
-<i>Type any name: factorial, prime, loop, marksheet - I will give full code</i>
-  `;
 }
-const allPythonPrograms = [];
-for(let i=1;i<=300;i++){
- let title = i<=10 ? ["Hello World","Add Two Numbers","Even Odd","Factorial","Fibonacci","Palindrome","Prime Check","Mark Sheet","Largest of Three","Simple Calculator"][i-1] : `Python Program ${i}`;
- allPythonPrograms.push({id:i, title: title + ` - Example ${i}`, code: `# Program ${i}\nprint("Program ${i} - NIAT")`});
-}
+
 function sendMsg(){
   let input = document.getElementById("userInput");
   let msg = input.value.trim();
-  if(msg == "") return;
-
+  if(msg=="") return;
   let chat = document.querySelector(".chat-container") || document.body;
+  
+  let u = document.createElement("div");
+  u.innerHTML = "<b>You:</b> "+msg;
+  u.style.cssText="background:#2563eb;color:white;padding:12px;margin:10px;border-radius:12px;";
+  chat.appendChild(u);
+  input.value="";
 
-  let userDiv = document.createElement("div");
-  userDiv.innerHTML = "<b>You:</b> " + msg;
-  userDiv.style.cssText = "background:#2563eb;color:white;padding:12px;margin:10px;border-radius:12px;";
-  chat.appendChild(userDiv);
+  let ans = null;
+  if(msg.toLowerCase()=="python") ans = getPythonPrograms();
+  else ans = getProgramAnswer(msg);
+  if(!ans) ans = "Program not found. Type <b>python</b> for list";
 
-  input.value = "";
-
-  if(msg.toLowerCase() == "python"){
-    let botDiv = document.createElement("div");
-    botDiv.innerHTML = getPythonPrograms();
-    botDiv.style.cssText = "background:#1e293b;color:white;padding:15px;margin:10px;border-radius:12px;line-height:1.6;";
-    chat.appendChild(botDiv);
-    window.scrollTo(0, document.body.scrollHeight);
-    return;
-  }
- let text=input.value.trim();
- if(!text) return;
- addMsg(text,'user');
- input.value='';
- setTimeout(()=>{ botReply(text)}, 400);
-}
-function addMsg(html,type){
- let chat=document.getElementById('chat');
- let div=document.createElement('div');
- div.className=`msg ${type}`;
- div.innerHTML=`<div class="bubble">${html}</div>`;
- chat.appendChild(div);
- chat.scrollTop=chat.scrollHeight;
-}
-
-function botReply(q){
- let lower=q.toLowerCase();
-
- if(lower.includes('loop')){
-  addMsg(`
-<div class="card">
-<span class="chapter">PYTHON CHAPTER 4: LOOPS</span> <span class="tag">Definition + Code</span><br><br>
-<b>What is Loop?</b><br>
-Loop is used to repeat a block of code multiple times. Instead of writing same code again and again, we use loop.<br><br>
-
-<b>Types of Loops in Python:</b><br>
-1. <b>for loop</b> - Used when we know number of iterations<br>
-2. <b>while loop</b> - Used when condition based repetition<br><br>
-
-<b>Syntax:</b>
-<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button># For Loop
-for i in range(1,6):
-    print(i)
-
-# While Loop
-i=1
-while i<=5:
-    print(i)
-    i+=1</pre>
-
-<b>Real Example 1: Print Table</b>
-<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>n = int(input("Enter number: "))
-for i in range(1,11):
-    print(f"{n} x {i} = {n*i}")</pre>
-
-<b>Real Example 2: Factorial using Loop</b>
-<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>n = int(input("Enter number: "))
-fact=1
-for i in range(1,n+1):
-    fact*=i
-print(f"Factorial: {fact}")</pre>
-
-<b>Real Example 3: All Loop Programs (50+ available)</b><br>
-If you type <b>python loop</b> you will get 50+ loop programs at once.
-
-<b>When to use Loop?</b><br>
-- To print 1 to 100<br>
-- To calculate factorial, fibonacci<br>
-- To work with list, string<br>
-- To create patterns
-
-</div>
-`, 'bot');
-  return;
- }
-
- if(lower.includes('mark') && (lower.includes('sheet') || lower.includes('marksheet') || lower.includes('marks'))){
-  addMsg(`
-<div class="card">
-<span class="chapter">PYTHON PROJECT: MARK SHEET</span> <span class="tag">Full Code</span><br><br>
-<b>Mark Sheet Program - With Grade, Percentage, Pass/Fail</b>
-<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button># NIAT - Student Mark Sheet Program
-print("===== NIAT Student Mark Sheet =====")
-name = input("Enter Student Name: ")
-roll = input("Enter Roll No: ")
-
-# Input marks
-telugu = int(input("Enter Telugu Marks: "))
-hindi = int(input("Enter Hindi Marks: "))
-english = int(input("Enter English Marks: "))
-maths = int(input("Enter Maths Marks: "))
-science = int(input("Enter Science Marks: "))
-social = int(input("Enter Social Marks: "))
-
-total = telugu + hindi + english + maths + science + social
-percentage = total / 6
-average = total / 6
-
-# Grade Logic
-if percentage >= 90:
-    grade = "A+ Grade - Outstanding"
-elif percentage >= 80:
-    grade = "A Grade - Excellent"
-elif percentage >= 70:
-    grade = "B Grade - Good"
-elif percentage >= 60:
-    grade = "C Grade - Average"
-elif percentage >= 35:
-    grade = "D Grade - Pass"
-else:
-    grade = "Fail"
-
-# Pass / Fail Check
-if telugu >=35 and hindi >=35 and english >=35 and maths >=35 and science >=35 and social >=35:
-    result = "PASS"
-else:
-    result = "FAIL"
-    grade = "Fail due to subject fail"
-
-# Final Mark Sheet Output
-print("\\n===== FINAL MARK SHEET =====")
-print(f"Name: {name}")
-print(f"Roll No: {roll}")
-print(f"Total Marks: {total}/600")
-print(f"Percentage: {percentage:.2f}%")
-print(f"Grade: {grade}")
-print(f"Result: {result}")
-print("==============================")
-</pre>
-
-<b>Output Example:</b><br>
-Enter Student Name: Cherry<br>
-Total Marks: 540/600<br>
-Percentage: 90.00%<br>
-Grade: A+ Grade - Outstanding<br>
-Result: PASS<br><br>
-
-<b>Extra Features you can add:</b><br>
-- Add subjects dynamically<br>
-- Store in file<br>
-- Create for whole class using loop
-</div>
-`, 'bot');
-  return;
- }
-
- if(lower.includes('function')){
-  addMsg(`
-<div class="card">
-<span class="chapter">PYTHON CHAPTER 5: FUNCTIONS</span><br><br>
-<b>What is Function?</b><br>
-Function is a block of code that performs specific task. We can reuse it.<br><br>
-<b>Syntax:</b>
-<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>def greet(name):
-    print(f"Hello {name}")
-
-greet("NIAT")</pre>
-<b>Types:</b> Built-in, User-defined, Lambda, Recursive<br>
-<b>Example with Return:</b>
-<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>def add(a,b):
-    return a+b
-print(add(10,20))</pre>
-</div>`, 'bot');
-  return;
- }
-
- if(lower.includes('string')){
-  addMsg(`
-<div class="card">
-<span class="chapter">PYTHON CHAPTER 6: STRINGS</span><br><br>
-<b>What is String?</b><br>
-String is collection of characters inside quotes.<br><br>
-<b>Example:</b>
-<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>s = "NIAT"
-print(s[0]) # N
-print(s.upper()) # NIAT
-print(s[::-1]) # TAIN - Reverse
-print(len(s)) # 4</pre>
-<b>Common Programs:</b> Palindrome, Reverse, Vowel Count, Anagram
-</div>`, 'bot');
-  return;
- }
-
- if(lower.includes('if') || lower.includes('else') || lower.includes('condition')){
-  addMsg(`
-<div class="card">
-<span class="chapter">PYTHON CHAPTER 3: CONDITIONAL STATEMENTS</span><br><br>
-<b>if, elif, else</b> - Used for decision making.<br>
-<pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>n = int(input("Enter marks: "))
-if n >= 90:
-    print("A+ Grade")
-elif n >= 80:
-    print("A Grade")
-else:
-    print("Pass")</pre>
-</div>`, 'bot');
-  return;
- }
-
- if(lower.trim()==='python' || lower.includes('all python') || lower.includes('300')){
-  let html = `<b>All 300+ Python Programs Loaded</b> <span class="tag">${allPythonPrograms.length} Programs</span><div class="prog-grid" style="margin-top:10px">`;
-  allPythonPrograms.slice(0,100).forEach(p=>{
-   html+=`<div class="card"><b>${p.id}. ${p.title}</b><pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>${p.code}</pre></div>`;
-  });
-  html+=`</div><br><b>Showing 100 of 300+ programs. Type "python basic" or "python loop" to filter, or search "marksheet", "even odd"</b>`;
-  addMsg(html,'bot');
-  return;
- }
-
- // Default search in programs
- let found = allPythonPrograms.filter(p=> p.title.toLowerCase().includes(lower));
- if(found.length>0){
-  let html = `<b>Found ${found.length} programs for "${q}"</b><div class="prog-grid">`;
-  found.slice(0,20).forEach(p=>{
-   html+=`<div class="card"><b>${p.id}. ${p.title}</b><pre><button class="copy-btn" onclick="copyCode(this)">Copy</button>${p.code}</pre></div>`;
-  });
-  html+=`</div>`;
-  addMsg(html,'bot');
- } else {
-  addMsg(`I understand "<b>${q}</b>"!<br><br>
-I can answer like ChatGPT:<br>
-- <b>loop</b> -> full definition + chapter + code<br>
-- <b>function, string, if else, list</b> -> chapter wise explanation<br>
-- <b>marksheet / marks</b> -> full marksheet project code<br>
-- <b>python</b> -> 300+ programs<br>
-- <b>even odd, factorial, prime</b> -> specific code<br><br>
-Try typing <b>loop</b> or <b>marksheet</b> now!`, 'bot');
- }
-}
-
-function copyCode(btn){
- let code=btn.parentElement.innerText.replace('Copy','').trim();
- navigator.clipboard.writeText(code);
- btn.innerText='Copied!';
- setTimeout(()=>btn.innerText='Copy',1200);
+  let b = document.createElement("div");
+  b.innerHTML = ans;
+  b.style.cssText="background:#1e293b;color:white;padding:15px;margin:10px;border-radius:12px;line-height:1.6;";
+  chat.appendChild(b);
+  window.scrollTo(0,document.body.scrollHeight);
 }
 </script>
-</body>
+  
+  </div>
+  </body>
 </html>
