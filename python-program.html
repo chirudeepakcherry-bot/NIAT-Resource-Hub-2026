@@ -55,10 +55,106 @@ You can ask me ANYTHING:<br>
   <div class="search-bar">
     <input type="text" id="userInput" placeholder="Ask ChatGPT" onkeypress="if(event.key==='Enter') sendMsg()">
     <button class="arrow-btn" onclick="sendMsg()">↑</button>
-  </div>
+  </div>let ans = getProgramAnswer(msg);
+if(ans){
+  let botDiv = document.createElement("div");
+  botDiv.innerHTML = ans;
+  botDiv.style.cssText = "background:#1e293b;color:white;padding:15px;margin:10px;border-radius:12px;line-height:1.6;";
+  chat.appendChild(botDiv);
+  return;
+}
 <script>
   function getPythonPrograms(){
-  return `
+  return
+  function getProgramAnswer(msg){
+  msg = msg.toLowerCase();
+  
+  const programs = {
+    "hello world": `<b>Hello World Program</b><pre>print("Hello World")</pre><b>Output:</b> Hello World`,
+    
+    "add two numbers": `<b>Add Two Numbers</b><pre>a = int(input("Enter a: "))
+b = int(input("Enter b: "))
+print("Sum =", a+b)</pre>`,
+    
+    "even or odd": `<b>Even or Odd</b><pre>n = int(input("Enter number: "))
+if n % 2 == 0:
+    print("Even")
+else:
+    print("Odd")</pre>`,
+    
+    "factorial": `<b>Factorial Program</b><pre>n = int(input("Enter number: "))
+fact = 1
+for i in range(1, n+1):
+    fact = fact * i
+print("Factorial =", fact)</pre>`,
+    
+    "prime": `<b>Prime Number</b><pre>n = int(input("Enter number: "))
+is_prime = True
+for i in range(2, n):
+    if n % i == 0:
+        is_prime = False
+        break
+print("Prime" if is_prime and n>1 else "Not Prime")</pre>`,
+    
+    "fibonacci": `<b>Fibonacci Series</b><pre>n = int(input("Enter terms: "))
+a, b = 0, 1
+for i in range(n):
+    print(a, end=" ")
+    a, b = b, a+b</pre>`,
+    
+    "reverse number": `<b>Reverse Number</b><pre>n = int(input("Enter number: "))
+rev = 0
+while n > 0:
+    rev = rev*10 + n%10
+    n = n//10
+print("Reverse =", rev)</pre>`,
+    
+    "palindrome": `<b>Palindrome Number</b><pre>n = int(input("Enter number: "))
+temp = n
+rev = 0
+while n > 0:
+    rev = rev*10 + n%10
+    n = n//10
+print("Palindrome" if temp==rev else "Not Palindrome")</pre>`,
+    
+    "armstrong": `<b>Armstrong Number</b><pre>n = int(input("Enter number: "))
+temp = n
+s = 0
+while n > 0:
+    d = n%10
+    s = s + d**3
+    n = n//10
+print("Armstrong" if temp==s else "Not Armstrong")</pre>`,
+    
+    "largest": `<b>Largest of 3 Numbers</b><pre>a,b,c = 10,25,15
+print("Largest =", max(a,b,c))</pre>`,
+    
+    "leap year": `<b>Leap Year</b><pre>year = int(input("Enter year: "))
+if (year%4==0 and year%100!=0) or (year%400==0):
+    print("Leap Year")
+else:
+    print("Not Leap Year")</pre>`,
+    
+    "marksheet": `<b>Marksheet Program</b><pre>name = input("Enter name: ")
+m1,m2,m3 = 80,90,85
+total = m1+m2+m3
+print(name, "Total =", total, "Average =", total/3)</pre>`,
+    
+    "calculator": `<b>Calculator Program</b><pre>a = int(input("Enter a: "))
+b = int(input("Enter b: "))
+print("Add:",a+b)
+print("Sub:",a-b)
+print("Mul:",a*b)
+print("Div:",a/b)</pre>`
+  };
+
+  for(let key in programs){
+    if(msg.includes(key)){
+      return programs[key];
+    }
+  }
+  return null;
+}  
 <b>Python All Programs List (300+)</b><br><br>
 <b>1. Basic Programs:</b><br>
 1. Hello World<br>2. Add Two Numbers<br>3. Swap Two Numbers<br>4. Even or Odd<br>5. Positive Negative Zero<br>6. Largest of 3 Numbers<br>7. Factorial<br>8. Prime Number<br>9. Fibonacci Series<br>10. Reverse Number<br><br>
