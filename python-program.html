@@ -4,111 +4,95 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NIAT AI Tutor</title>
 <style>
-body{font-family:Arial;background:#0f172a;color:white;padding:15px;margin:0}
-a{color:#60a5fa}
-.header{text-align:center;background:#1e293b;padding:20px;border-radius:15px;position:sticky;top:0}
-input{width:90%;max-width:500px;padding:14px;border-radius:12px;border:none;font-size:16px;margin-top:10px}
-.card{background:#1e293b;padding:18px;margin:18px 0;border-radius:15px;border-left:5px solid #3b82f6}
-pre{background:#020617;padding:14px;border-radius:8px;overflow-x:auto}
-.btn{background:#3b82f6;color:white;padding:8px 14px;border:none;border-radius:8px;cursor:pointer}
-.tabs span{background:#334155;padding:6px 12px;border-radius:8px;cursor:pointer;margin-right:5px;font-size:13px;display:inline-block}
-.tabs span.active{background:#3b82f6}
-pre{display:none} pre.show{display:block}
-.explain{background:#0f172a;padding:12px;border-radius:8px;line-height:1.6;font-size:14px}
-details{background:#020617;padding:10px;border-radius:8px;margin-top:8px}
-summary{color:#93c5fd;cursor:pointer;font-weight:bold}
+body{font-family:Arial;background:#0f172a;color:white;margin:0;display:flex;flex-direction:column;height:100vh}
+.header{background:#1e293b;padding:15px;text-align:center}
+.header a{color:#60a5fa;float:left;text-decoration:none}
+#chat{flex:1;overflow-y:auto;padding:15px}
+.msg{max-width:85%;padding:12px;margin:10px 0;border-radius:14px;line-height:1.6;font-size:14px;white-space:pre-wrap}
+.user{background:#2563eb;margin-left:auto}
+.bot{background:#1e293b;margin-right:auto}
+.bot pre{background:#020617;padding:12px;border-radius:8px;overflow-x:auto;white-space:pre-wrap}
+.input-box{display:flex;padding:12px;background:#1e293b;gap:8px}
+.input-box input{flex:1;padding:14px;border-radius:12px;border:none;font-size:16px}
+.input-box button{background:#2563eb;color:white;border:none;padding:0 20px;border-radius:12px;font-size:16px;cursor:pointer}
+.langs{margin-top:8px}
+.langs button{background:#334155;color:white;border:none;padding:5px 10px;border-radius:15px;margin:2px;cursor:pointer;font-size:12px}
+.langs button.active{background:#2563eb}
 </style>
 </head>
 <body>
-<a href="index.html">⬅ Back to Home</a>
-<div class="header">
-<h1>🤖 NIAT AI Tutor</h1>
-<p>Type anything - thappu type chesina correct ga vastadi!</p>
-<input id="search" onkeyup="doSearch()" placeholder="Try: helo world, factrial, prim, even...">
+<div class="header"><a href="index.html">⬅ Home</a><h2>🤖 NIAT AI Tutor</h2></div>
+
+<div id="chat">
+<div class="msg bot">Hi mawa! 👋
+Nenu NIAT AI Tutor ni.
+Em kavali? Type chey:
+• hello world
+• factorial
+• prime
+• even odd</div>
 </div>
-<div id="result"></div>
-<div id="programs"></div>
+
+<div class="input-box">
+<input id="userInput" placeholder="Ask anything... e.g. factorial" onkeypress="if(event.key=='Enter')sendMsg()">
+<button onclick="sendMsg()">Send</button>
+</div>
 
 <script>
-const data=[
-{
-title:"Hello World", keys:["hello","helo","world","first"],
-codes:{
-Python:'print("Hello NIAT")',
-Java:'public class Main{public static void main(String[] a){System.out.println("Hello NIAT");}}',
-C:'#include <stdio.h>\nint main(){printf("Hello NIAT");return 0;}',
-JS:'console.log("Hello NIAT");'
-},
-explain:"First program mawa. Screen meeda text print cheyadaniki use chestam.",
-qa:[["Output enti?","Hello NIAT ani vastadi"],["Why print?","Python lo output chupinchadaniki print() use chestam"]]
-},
-{
-title:"Factorial", keys:["factorial","fact","factrial","factoral"],
-codes:{
-Python:'n=int(input("Enter: "))\nf=1\nfor i in range(1,n+1):\n f=f*i\nprint(f)',
-Java:'import java.util.*;\nclass Main{public static void main(String[] a){Scanner s=new Scanner(System.in);int n=s.nextInt(),f=1;for(int i=1;i<=n;i++)f*=i;System.out.println(f);}}',
-C:'#include <stdio.h>\nint main(){int n,f=1;scanf("%d",&n);for(int i=1;i<=n;i++)f*=i;printf("%d",f);return 0;}',
-JS:'let n=5,f=1;for(let i=1;i<=n;i++)f*=i;console.log(f);'
-},
-explain:"Factorial ante 5! = 5x4x3x2x1 = 120. Loop tho multiply chestam.",
-qa:[["5! value?","120"],["Loop endi?","Prathi number ni multiply cheyadaniki"]]
-},
-{
-title:"Prime Number", keys:["prime","prim","prime number"],
-codes:{
-Python:'n=int(input("Enter: "))\nc=0\nfor i in range(1,n+1):\n if n%i==0: c+=1\nprint("Prime" if c==2 else "Not Prime")',
-Java:'import java.util.*;\nclass Main{public static void main(String[] a){Scanner s=new Scanner(System.in);int n=s.nextInt(),c=0;for(int i=1;i<=n;i++)if(n%i==0)c++;System.out.println(c==2?"Prime":"Not Prime");}}',
-C:'#include <stdio.h>\nint main(){int n,c=0;scanf("%d",&n);for(int i=1;i<=n;i++)if(n%i==0)c++;printf(c==2?"Prime":"Not Prime");return 0;}',
-JS:'let n=7,c=0;for(let i=1;i<=n;i++)if(n%i==0)c++;console.log(c==2?"Prime":"Not Prime");'
-},
-explain:"Prime ante 1 mariyu ade number tho matrame divide ayyedi. Factors count 2 unte Prime.",
-qa:[["7 Prime aa?","Avunu, factors 1 and 7 matrame"],["1 Prime aa?","Kadu, factor okkate untadi"]]
-},
-{
-title:"Even or Odd", keys:["even","odd","even odd"],
-codes:{
-Python:'n=int(input("Enter: "))\nprint("Even" if n%2==0 else "Odd")',
-Java:'import java.util.*;\nclass Main{public static void main(String[] a){Scanner s=new Scanner(System.in);int n=s.nextInt();System.out.println(n%2==0?"Even":"Odd");}}',
-C:'#include <stdio.h>\nint main(){int n;scanf("%d",&n);printf(n%2==0?"Even":"Odd");return 0;}',
-JS:'let n=4;console.log(n%2==0?"Even":"Odd");'
-},
-explain:"% ante remainder. 2 tho divide cheste remainder 0 unte Even.",
-qa:[["% ante enti?","Modulus - remainder istadi"],["10 Even aa?","Avunu"]]
-}
-];
+const programs={
+"hello world":{title:"Hello World",codes:{Python:'print("Hello NIAT")',Java:'public class Main{\n public static void main(String[] a){\n  System.out.println("Hello NIAT");\n }\n}',C:'#include <stdio.h>\nint main(){\n printf("Hello NIAT");\n return 0;\n}',JS:'console.log("Hello NIAT");'},explain:"Screen meeda text print cheyadaniki first program mawa."},
+"factorial":{title:"Factorial",codes:{Python:'n=int(input("Enter: "))\nf=1\nfor i in range(1,n+1):\n f=f*i\nprint(f)',Java:'int n=5,f=1;\nfor(int i=1;i<=n;i++) f*=i;\nSystem.out.println(f);',C:'int n=5,f=1;\nfor(int i=1;i<=n;i++) f*=i;\nprintf("%d",f);',JS:'let n=5,f=1;\nfor(let i=1;i<=n;i++) f*=i;\nconsole.log(f);'},explain:"5! = 5x4x3x2x1 = 120. Loop tho multiply chestam."},
+"prime":{title:"Prime Number",codes:{Python:'n=int(input("Enter: "))\nc=0\nfor i in range(1,n+1):\n if n%i==0: c+=1\nprint("Prime" if c==2 else "Not Prime")',Java:'int n=7,c=0;\nfor(int i=1;i<=n;i++) if(n%i==0) c++;\nSystem.out.println(c==2?"Prime":"Not Prime");',C:'int n=7,c=0;\nfor(int i=1;i<=n;i++) if(n%i==0) c++;\nprintf(c==2?"Prime":"Not Prime");',JS:'let n=7,c=0;\nfor(let i=1;i<=n;i++) if(n%i==0) c++;\nconsole.log(c==2?"Prime":"Not Prime");'},explain:"Factors 2 matrame unte Prime mawa."},
+"even odd":{title:"Even or Odd",codes:{Python:'n=int(input("Enter: "))\nprint("Even" if n%2==0 else "Odd")',Java:'int n=4;\nSystem.out.println(n%2==0?"Even":"Odd");',C:'int n=4;\nprintf(n%2==0?"Even":"Odd");',JS:'let n=4;\nconsole.log(n%2==0?"Even":"Odd");'},explain:"% remainder chustadi. 0 unte Even."}
+};
+const aliases={"helo":"hello world","hello":"hello world","fact":"factorial","factrial":"factorial","factoral":"factorial","prim":"prime","prime number":"prime","even":"even odd","odd":"even odd"};
 
-function makeCard(p,i){
-let tabs='',pres='';
-Object.keys(p.codes).forEach((lang,j)=>{
-tabs+=`<span class="${j==0?'active':''}" onclick="showTab(this,${i},'${lang}')">${lang}</span>`;
-pres+=`<pre id="p${i}-${lang}" class="${j==0?'show':''}">${p.codes[lang].replace(/</g,"&lt;")}</pre>`;
+let currentProgram=null, currentLang="Python";
+
+function addMsg(text,who){
+let d=document.createElement("div");
+d.className="msg "+who;
+d.innerHTML=text;
+document.getElementById("chat").appendChild(d);
+document.getElementById("chat").scrollTop=999999;
+return d;
+}
+function showProgram(key){
+currentProgram=key;
+let p=programs[key];
+let html=`<b>${p.title} - ${currentLang}</b><pre>${p.codes[currentLang].replace(/</g,"&lt;")}</pre><b>🧠 Explanation:</b> ${p.explain}<div class="langs">`;
+Object.keys(p.codes).forEach(lang=>{
+html+=`<button class="${lang==currentLang?'active':''}" onclick="changeLang('${lang}')">${lang}</button>`;
 });
-let qas=p.qa.map(q=>`<details><summary>Q: ${q[0]}</summary><p>${q[1]}</p></details>`).join('');
-return `<div class="card"><h3>${p.title}</h3><div class="tabs">${tabs}</div>${pres}<button class="btn" onclick="copyCode(${i},this)">Copy Code</button><div class="explain"><b>🧠 Explanation:</b> ${p.explain}</div>${qas}</div>`;
+html+=`</div><button onclick="copyCode()" style="background:#2563eb;color:white;border:none;padding:6px 12px;border-radius:8px;margin-top:8px;cursor:pointer">Copy Code</button>`;
+addMsg(html,"bot");
 }
-function showTab(el,i,lang){
-let card=el.closest('.card');
-card.querySelectorAll('pre').forEach(x=>x.classList.remove('show'));
-card.querySelectorAll('span').forEach(x=>x.classList.remove('active'));
-document.getElementById(`p${i}-${lang}`).classList.add('show');
-el.classList.add('active');
+function changeLang(lang){
+currentLang=lang;
+let msgs=document.querySelectorAll(".bot");
+showProgram(currentProgram);
 }
-function copyCode(i,btn){
-let pre=document.querySelectorAll(`[id^="p${i}-"].show`)[0] || document.querySelector(`[id^="p${i}-"]`);
-if(pre) navigator.clipboard.writeText(pre.innerText);
-btn.innerText="Copied ✅"; setTimeout(()=>btn.innerText="Copy Code",1500);
+function copyCode(){
+navigator.clipboard.writeText(programs[currentProgram].codes[currentLang]);
+alert("Copied ✅");
 }
-function render(list){
-document.getElementById('programs').innerHTML=list.map((p)=>makeCard(p,data.indexOf(p))).join('');
+function sendMsg(){
+let input=document.getElementById("userInput");
+let msg=input.value.trim();
+if(!msg) return;
+addMsg(msg,"user");
+input.value="";
+let q=msg.toLowerCase();
+let key=null;
+if(programs[q]) key=q;
+else if(aliases[q]) key=aliases[q];
+else{ for(let k in programs){ if(q.includes(k)) key=k; } for(let a in aliases){ if(q.includes(a)) key=aliases[a]; } }
+
+setTimeout(()=>{
+if(key) showProgram(key);
+else addMsg("Ardham kaledu mawa 😅<br>Try: <b>hello world, factorial, prime, even odd</b>","bot");
+},400);
 }
-function doSearch(){
-let q=document.getElementById('search').value.toLowerCase().trim();
-if(!q){render(data);document.getElementById('result').innerHTML="";return;}
-let found=data.filter(p=>p.keys.some(k=>k.includes(q)||q.includes(k)||p.title.toLowerCase().includes(q)));
-if(found.length){render(found);document.getElementById('result').innerHTML=`<p style="text-align:center;color:#4ade80">✅ ${found.length} result(s) dorikindi mawa!</p>`;}
-else{document.getElementById('programs').innerHTML="";document.getElementById('result').innerHTML=`<p style="text-align:center;color:#f87171">❌ Ardham kaledu mawa, 'hello', 'factorial', 'prime' try chey</p>`;}
-}
-render(data);
 </script>
 </body>
 </html>
