@@ -2,91 +2,88 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>NIAT AI Tutor</title>
+<title>NIAT AI Tutor - Complete 30</title>
 <style>
-*{box-sizing:border-box}
 body{background:#343541;color:#fff;font-family:Arial;margin:0;display:flex;justify-content:center}
 .main{width:100%;max-width:800px;height:100vh;display:flex;flex-direction:column}
-header{text-align:center;padding:15px;background:#202123;font-weight:bold}
+header{text-align:center;padding:15px;background:#202123}
 #chat{flex:1;overflow-y:auto;padding:20px}
 .msg{background:#444654;padding:15px;border-radius:10px;margin:12px 0}
-pre{background:#000;padding:12px;border-radius:8px;overflow:auto;white-space:pre-wrap}
+pre{background:#000;padding:12px;border-radius:8px;white-space:pre-wrap}
 button{background:#19c37d;color:#fff;border:none;padding:8px 14px;border-radius:20px;margin:4px;cursor:pointer}
 .inputBox{display:flex;gap:8px;padding:15px;background:#202123}
-input{flex:1;padding:14px;border-radius:25px;border:none;outline:none}
-.mic{background:#ef4444;width:48px;border-radius:50%;font-size:18px}
-.send{background:#19c37d;width:48px;border-radius:50%}
+input{flex:1;padding:14px;border-radius:25px;border:none}
+.mic{background:#ef4444;width:48px;border-radius:50%}
 .tag{background:#555;padding:5px 10px;border-radius:12px;font-size:12px}
 </style>
 </head>
 <body>
 <div class="main">
-<header>NIAT AI Tutor - 30 Python Programs</header>
-<div id="chat">
-<div class="msg">Hi! I am NIAT AI Tutor.<br><br>Type or use Mic 🎤 and ask:<br>hello world, factorial, prime, even odd, fibonacci, palindrome, armstrong, reverse, quiz, interview and 20 more programs.</div>
-</div>
+<header><b>NIAT AI Tutor</b> - Ask any of 30 Python Programs</header>
+<div id="chat"><div class="msg">Hi! I am NIAT AI Tutor.<br>Type or speak using Mic 🎤<br><br>Programs: hello world, factorial, prime, even odd, fibonacci, palindrome, armstrong, reverse number, sum of digits, largest of 3, swap, simple interest, area of circle, table, vowels, leap year, pattern, sum n, average, gcd, lcm, power, sqrt, bubble sort, linear search, binary search, count words, remove duplicates, second largest, calculator, quiz, interview</div></div>
 <div class="inputBox">
 <button class="mic" onclick="startMic()">🎤</button>
 <input id="inp" placeholder="Ask anything...">
-<button class="send" onclick="ask()">➤</button>
+<button onclick="ask()">➤</button>
 </div>
 </div>
 
 <script>
-const P={
-"hello world":{t:"Hello World",c:`print("Hello NIAT")`,e:"Explanation: print() displays output on screen. First program for beginners.",q:"Q1: Output function in Python? A) print() B) input() Ans: A"},
-"factorial":{t:"Factorial",c:`n=int(input("Enter number: "))\nf=1\nfor i in range(1,n+1): f*=i\nprint(f)`,e:"Explanation: Product of all numbers from 1 to n using loop.",q:"Q1: 5! = ? A) 120 B) 60 Ans: A"},
-"prime":{t:"Prime Number",c:`n=int(input("Enter number: "))\nc=0\nfor i in range(1,n+1):\n if n%i==0: c+=1\nprint("Prime" if c==2 else "Not Prime")`,e:"Explanation: Prime has only 2 factors, 1 and itself.",q:"Q1: 7 is Prime? A) Yes B) No Ans: A"},
-"even odd":{t:"Even Odd",c:`n=int(input("Enter number: "))\nprint("Even" if n%2==0 else "Odd")`,e:"Explanation: Remainder 0 when divided by 2 means Even.",q:"Q1: 15 is? A) Even B) Odd Ans: B"},
-"fibonacci":{t:"Fibonacci",c:`n=int(input("Terms: "))\na,b=0,1\nfor i in range(n):\n print(a,end=" ")\n a,b=b,a+b`,e:"Explanation: Next term is sum of previous two terms.",q:"Q1: 0,1,1,2,3,5 ? A) 8 B) 7 Ans: A"},
-"palindrome":{t:"Palindrome",c:`s=input("Enter: ")\nprint("Palindrome" if s==s[::-1] else "Not")`,e:"Explanation: String equals its reverse using slicing.",q:"Q1: madam is Palindrome? A) Yes B) No Ans: A"},
-"armstrong":{t:"Armstrong",c:`n=int(input("Enter: "))\nt=n;s=0\nwhile t>0:\n d=t%10; s+=d**3; t//=10\nprint("Armstrong" if s==n else "Not")`,e:"Explanation: Sum of cubes of digits equals number. Ex: 153.",q:"Q1: 153 Armstrong? A) Yes B) No Ans: A"},
-"reverse":{t:"Reverse Number",c:`n=int(input("Enter: "))\nrev=0\nwhile n>0:\n rev=rev*10+n%10; n//=10\nprint(rev)`,e:"Explanation: Extract last digit and build reverse number.",q:"Q1: Reverse 123? A) 321 B) 132 Ans: A"}
+const P = {
+"hello world":["Hello World",`print("Hello NIAT")`,"print() is used to display output on screen.","Output function? A) print() Ans: A"],
+"factorial":["Factorial",`n=int(input())\nf=1\nfor i in range(1,n+1): f*=i\nprint(f)`,"Product of 1 to n using loop.","5! = 120"],
+"prime":["Prime",`n=int(input())\nc=sum(1 for i in range(1,n+1) if n%i==0)\nprint("Prime" if c==2 else "Not")`,"Prime has only 2 factors.","7 is Prime? Yes"],
+"even odd":["Even Odd",`n=int(input())\nprint("Even" if n%2==0 else "Odd")`,"Remainder 0 with 2 means Even.","15 is Odd"],
+"fibonacci":["Fibonacci",`n=int(input())\na,b=0,1\nfor i in range(n):\n print(a,end=" "); a,b=b,a+b`,"Next term is sum of previous two.","0,1,1,2,3,5 next is 8"],
+"palindrome":["Palindrome",`s=input()\nprint(s==s[::-1])`,"String equals its reverse.","madam is Palindrome"],
+"armstrong":["Armstrong",`n=int(input())\nt=n;s=0\nwhile t>0:\n s+=(t%10)**3; t//=10\nprint(s==n)`,"Sum of cubes of digits equals number. Ex 153","153 is Armstrong"],
+"reverse number":["Reverse Number",`n=int(input())\nr=0\nwhile n>0:\n r=r*10+n%10; n//=10\nprint(r)`,"Build reverse using last digit.","Reverse 123 = 321"],
+"sum of digits":["Sum of Digits",`n=int(input())\ns=0\nwhile n>0:\n s+=n%10; n//=10\nprint(s)`,"Add all digits extracted by %10.","Sum of 123 = 6"],
+"largest of 3":["Largest of 3",`a,b,c=10,25,15\nprint(max(a,b,c))`,"max() returns greatest value.","max(10,25,15)=25"],
+"swap":["Swap",`a,b=5,10\na,b=b,a\nprint(a,b)`,"Python swaps without temp variable.","a,b=b,a"],
+"simple interest":["Simple Interest",`p,r,t=1000,5,2\nprint((p*r*t)/100)`,"Formula SI = (P*R*T)/100","SI denominator is 100"],
+"area of circle":["Area Circle",`import math\nr=7\nprint(math.pi*r*r)`,"Area = π * r²","Uses pi value"],
+"table":["Multiplication Table",`n=5\nfor i in range(1,11): print(n*i)`,"Loop 1 to 10 to print table.","5x3=15"],
+"vowels":["Count Vowels",`s="hello"\nprint(sum(1 for c in s if c in "aeiou"))`,"Check character in aeiou.","a e i o u are vowels"],
+"leap year":["Leap Year",`y=2024\nprint((y%400==0) or (y%4==0 and y%100!=0))`,"Divisible by 400 or by 4 not 100.","2024 is Leap"],
+"pattern":["Pattern",`for i in range(1,6): print("*"*i)`,"String multiplication prints stars.","\"*\"*3 = ***"],
+"sum n":["Sum of N",`n=10\nprint(n*(n+1)//2)`,"Formula n(n+1)/2","Sum 1 to 10 = 55"],
+"average":["Average",`l=[10,20,30]\nprint(sum(l)/len(l))`,"Average = sum / count","Avg 10,20 = 15"],
+"gcd":["GCD",`import math\nprint(math.gcd(12,18))`,"Largest divisor of both numbers.","GCD 12,18 = 6"],
+"lcm":["LCM",`import math\na,b=4,6\nprint(a*b//math.gcd(a,b))`,"LCM = (a*b)/GCD","LCM 4,6 = 12"],
+"power":["Power",`print(2**3)`,"** operator for power.","2**3 = 8"],
+"sqrt":["Square Root",`import math\nprint(math.sqrt(25))`,"math.sqrt() gives square root.","sqrt 25 = 5"],
+"bubble sort":["Bubble Sort",`l=[5,2,9,1]\nfor i in range(len(l)):\n for j in range(len(l)-i-1):\n  if l[j]>l[j+1]: l[j],l[j+1]=l[j+1],l[j]\nprint(l)`,"Swap adjacent elements repeatedly.","Compares adjacent"],
+"linear search":["Linear Search",`l=[10,20,30]\nprint(30 in l)`,"Check element by element.","Sequential search"],
+"binary search":["Binary Search",`import bisect\nl=[10,20,30,40]\nprint(bisect.bisect_left(l,30))`,"Works on sorted list, divides in half.","Needs sorted list"],
+"count words":["Count Words",`s="hello world python"\nprint(len(s.split()))`,"split() splits by space.","3 words"],
+"remove duplicates":["Remove Duplicates",`l=[1,2,2,3]\nprint(list(set(l)))`,"set() keeps unique values only.","No duplicates in set"],
+"second largest":["Second Largest",`l=[10,99,45]\nl=sorted(set(l))\nprint(l[-2])`,"Sort and take second last.","l[-1] is largest"],
+"calculator":["Calculator",`a,b=10,5\nprint(a+b, a-b, a*b, a/b)`,"Perform arithmetic using operators.","/ is division"]
 };
-// Note: Add remaining 22 programs in same format here - total 30 ready structure
 
-function speak(text){
- let u=new SpeechSynthesisUtterance(text);
- u.lang="en-US";
- speechSynthesis.speak(u);
-}
-function copyCode(code,btn){
- navigator.clipboard.writeText(code);
- btn.innerText="Copied!";
- setTimeout(()=>btn.innerText="Copy Code",1500);
-}
-function show(p){
- let id="c"+Date.now();
- document.getElementById("chat").innerHTML+=`
- <div class="msg">
- <h3>${p.t} - Python</h3>
- <pre id="${id}">${p.c}</pre>
- <p>${p.e}</p>
- <button onclick="copyCode(\`${p.c}\`,this)">Copy Code</button>
- <button onclick="speak(\`${p.e}\`)">🔊 Speak</button>
- <p><b>🎯 Quiz Start!</b><br>${p.q}</p>
- <span class="tag">Python</span> <span class="tag">Java</span> <span class="tag">C</span> <span class="tag">JS</span>
- </div>`;
+function speak(t){let u=new SpeechSynthesisUtterance(t);speechSynthesis.speak(u)}
+function show(k){
+ let p=P[k];
+ let html=`<div class="msg"><h3>${p[0]} - Python</h3><pre>${p[1]}</pre><p><b>Explanation:</b> ${p[2]}</p><button onclick="navigator.clipboard.writeText(\`${p[1]}\`);this.innerText='Copied!'">Copy Code</button> <button onclick="speak('${p[2]}')">🔊 Speak</button><p><b>🎯 Quiz Start!</b><br>${p[3]}</p><span class="tag">Python</span> <span class="tag">Java</span> <span class="tag">C</span> <span class="tag">JS</span></div>`;
+ document.getElementById("chat").innerHTML+=html;
  document.getElementById("chat").scrollTop=999999;
 }
 function ask(){
- let q=document.getElementById("inp").value.toLowerCase();
+ let q=document.getElementById("inp").value.toLowerCase().trim();
  document.getElementById("inp").value="";
- if(q.includes("quiz")){document.getElementById("chat").innerHTML+=`<div class="msg"><b>Quiz Start!</b><br>Q1: print() use?<br>Q2: 5! value?<br>Q3: Is 7 prime?</div>`;return;}
- if(q.includes("interview")){document.getElementById("chat").innerHTML+=`<div class="msg"><b>Interview:</b><br>1. What is Python?<br>2. List vs Tuple?<br>3. What is loop?<br>4. Explain OOPS</div>`;return;}
- for(let k in P){ if(q.includes(k)){ show(P[k]); return; } }
- document.getElementById("chat").innerHTML+=`<div class="msg">Ask: hello world, factorial, prime, even odd, fibonacci, palindrome, armstrong, reverse, quiz, interview</div>`;
+ if(q.includes("quiz")){document.getElementById("chat").innerHTML+=`<div class="msg"><b>Quiz Start!</b><br>Q1 print() use?<br>Q2 5! ?<br>Q3 sqrt(36)?</div>`;return}
+ if(q.includes("interview")){document.getElementById("chat").innerHTML+=`<div class="msg"><b>Interview Questions</b><br>1. What is Python?<br>2. List vs Tuple?<br>3. What is OOPS?</div>`;return}
+ for(let k in P) if(q.includes(k)){show(k);return}
+ document.getElementById("chat").innerHTML+=`<div class="msg">Please type a program name from list.</div>`;
 }
 function startMic(){
- let rec=new (window.SpeechRecognition||window.webkitSpeechRecognition)();
- rec.lang="en-US";
- rec.onresult=function(e){
-   document.getElementById("inp").value=e.results[0][0].transcript;
-   ask();
- }
- rec.start();
+ let R=window.SpeechRecognition||window.webkitSpeechRecognition;
+ let r=new R(); r.lang="en-US";
+ r.onresult=e=>{document.getElementById("inp").value=e.results[0][0].transcript; ask();}
+ r.start();
 }
-document.getElementById("inp").addEventListener("keypress",e=>{if(e.key==="Enter")ask()});
+document.getElementById("inp").addEventListener("keypress",e=>{if(e.key=="Enter")ask()});
 </script>
 </body>
 </html>
